@@ -76,8 +76,8 @@ nav a:hover {
 
 /* ================= HERO BANNER ================= */
 .hero {
-    background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.85)), 
-                url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=80') no-repeat center center/cover;
+    background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.8)), 
+                url('XANXERE-800x445.jpg') no-repeat center center/cover;
     height: 60vh;
     display: flex;
     justify-content: center;
@@ -565,4 +565,38 @@ footer {
     color: #444444;
     font-size: 11px;
     margin-top: 50px;
+}
+
+/* ================= BOTÃO FLUTUANTE WHATSAPP ================= */
+.whatsapp-floating-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #25D366;
+    color: #ffffff;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    z-index: 999; /* Garante que ele fique sobreposto a qualquer elemento */
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    text-decoration: none;
+}
+
+.whatsapp-floating-btn:hover {
+    background-color: #1ebd54;
+    transform: scale(1.1); /* Dá um leve efeito de crescimento ao passar o mouse */
+}
+
+/* Evita que o botão suma em telas menores de celulares */
+@media (max-width: 768px) {
+    .whatsapp-floating-btn {
+        bottom: 20px;
+        right: 20px;
+        width: 55px;
+        height: 55px;
+    }
 }
