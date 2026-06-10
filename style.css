@@ -26,18 +26,34 @@ header {
 }
 
 .logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 20px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    color: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 16px; /* Aumentado o espaço para equilibrar com o tamanho novo */
 }
 
-.logo span {
+/* Redimensionamento expressivo da imagem do logoT.png */
+.logo-img {
+    height: 65px; /* Aumentado significativamente para dar o destaque da marcação */
+    width: auto;
+    object-fit: contain;
+}
+
+/* Redimensionamento e peso para o título principal */
+.logo-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px; /* Título maior e imponente */
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #ffffff;
+    line-height: 1;
+}
+
+.logo-text span {
     color: #c5a059;
     font-weight: 400;
-    font-size: 16px;
-    letter-spacing: 1px;
+    font-size: 24px; /* A palavra IMÓVEIS acompanha o crescimento */
+    letter-spacing: 1.5px;
+    margin-left: 6px;
 }
 
 nav a {
@@ -98,6 +114,181 @@ nav a:hover {
     font-size: 18px;
     margin-bottom: 30px;
     font-weight: 300;
+}
+
+/* ================= ELEMENTO PESQUISA AVANÇADA (No Centro) ================= */
+.advanced-search-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    color: #c5a059; /* Dourado elegante (ou troque por #e74c3c se quiser estritamente vermelho) */
+    margin-top: 15px;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    text-align: center;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* ================= SEÇÃO SLIDER DE CIDADES (ABAIXO DO HERO) ================= */
+.regions-slider-section {
+    width: 100%;
+    background-color: #0d0d0d;
+    padding: 40px 0 20px 0;
+}
+
+/* Abas Superiores Estilo Minimalista Ouro */
+.carousel-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 25px;
+    padding: 0 20px;
+}
+
+.tab-btn {
+    background-color: transparent;
+    color: #ffffff;
+    border: 1px solid #c5a059;
+    padding: 10px 25px;
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    min-width: 130px;
+}
+
+.tab-btn:hover, .tab-btn.active {
+    background-color: #c5a059;
+    color: #0d0d0d;
+    box-shadow: 0 0 10px rgba(197, 160, 89, 0.3);
+}
+
+/* Container de Slides Fixo */
+.carousel-slider {
+    position: relative;
+    width: 100%;
+    height: 45vh; /* Altura ligeiramente menor para compor bem abaixo do hero */
+    overflow: hidden;
+}
+
+.carousel-slide {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out;
+    z-index: 1;
+}
+
+.carousel-slide.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Estilização do Título Central com as Chaves */
+.slide-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 55px;
+    font-weight: 700;
+    color: #ffffff;
+    text-transform: none;
+    letter-spacing: 1px;
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+    animation: fadeInTitle 1s ease-out;
+}
+
+@keyframes fadeInTitle {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Alinhamento do conteúdo interno do slide */
+.slide-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+/* Subtítulo "imóveis em:" estilo clássico e elegante (Círculo Preto) */
+.slide-subtitle {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 26px;
+    color: #c5a059; /* Dourado corporativo */
+    margin-bottom: -10px; /* Aproxima elegantemente do título principal */
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+    animation: fadeInTitle 1.2s ease-out;
+}
+
+/* Pequeno ajuste no título para casar perfeitamente com o subtítulo */
+.slide-title {
+    margin-top: 0;
+}
+
+/* Setas Laterais de Navegação */
+.carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.4);
+    color: #ffffff;
+    border: none;
+    font-size: 24px;
+    padding: 15px 10px;
+    cursor: pointer;
+    z-index: 10;
+    transition: background-color 0.3s, color 0.3s;
+    user-select: none;
+}
+
+.carousel-arrow:hover {
+    background-color: rgba(197, 160, 89, 0.8);
+    color: #0d0d0d;
+}
+
+.arrow-left { left: 0; border-radius: 0 4px 4px 0; }
+.arrow-right { right: 0; border-radius: 4px 0 0 4px; }
+
+/* Pontos Indicadores Inferiores (Dots) */
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 15px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    background-color: #444444;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.dot.active, .dot:hover {
+    background-color: #c5a059;
+    transform: scale(1.2);
+}
+
+/* Ajustes Responsivos */
+@media (max-width: 768px) {
+    .slide-title { font-size: 35px; }
+    .carousel-slider { height: 35vh; }
+    .carousel-tabs { flex-wrap: wrap; gap: 8px; }
+    .tab-btn { min-width: 45%; }
 }
 
 /* Barra de Filtros Alinhada */

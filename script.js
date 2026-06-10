@@ -217,3 +217,62 @@ function submitForm(event) {
 
 // Inicializar Vitrine ao Carregar
 window.onload = function() { renderVitrine(); };
+
+// ================= ENGINE DO CARROSSEL DE CIDADES =================
+let slideIndex = 0;
+const slides = document.querySelectorAll('.carousel-slide');
+const dots = document.querySelectorAll('.dot');
+
+function showSlides(index) {
+    if (slides.length === 0) return; // Segurança caso a seção mude
+    if (index >= slides.length) slideIndex = 0;
+    if (index < 0) slideIndex = slides.length - 1;
+
+    slides.forEach(slide => slide.classList.remove('active'));
+    dots.forEach(dot => dot.classList.remove('active'));
+
+    slides[slideIndex].classList.add('active');
+    dots[slideIndex].classList.add('active');
+}
+
+function moveSlide(step) {
+    showSlides(slideIndex += step);
+}
+
+function currentSlide(index) {
+    showSlides(slideIndex = index);
+}
+
+// Rotação Automática Suave a cada 6 segundos
+let autoSlideInterval = setInterval(() => moveSlide(1), 6000);
+
+function resetSlideTimer() {
+    clearInterval(autoSlideInterval);
+    autoSlideInterval = setInterval(() => moveSlide(1), 6000);
+}
+
+document.querySelectorAll('.carousel-arrow, .dot').forEach(elem => {
+    elem.addEventListener('click', resetSlideTimer);
+});
+
+// Vincula a ação das abas superiores aos filtros reais (Aluguel, Compra/Venda, Todos)
+function executeSearchStatus(statusValue) {
+    // Tira a classe active de todos os botões e adiciona no que foi clicado
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+    
+    if (event && event.currentTarget) {
+        event.currentTarget.classList.add('active');
+    }
+    
+    // Atualiza o select de busca oculto (se aplicável) e renderiza a vitrine filtrada
+    const searchStatusElem = document.getElementById('search-status');
+    if (searchStatusElem) {
+        searchStatusElem.value = statusValue;
+    }
+    
+    const searchCityElem = document.getElementById('search-city');
+    const currentCity = searchCityElem ? searchCityElem.value : "";
+    
+    // Dispara a renderização atualizada baseada nos dados em memória
+    renderVitrine({ status: statusValue, local: currentCity });
+}
