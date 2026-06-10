@@ -784,7 +784,7 @@ footer {
     border-radius: 50%;
 }
 
-/* Anel de gradiente oficial do Instagram */
+/* Anel de gradiente oficial do Instagram - CORRIGIDO */
 .insta-profile-wrapper::before {
     content: '';
     position: absolute;
