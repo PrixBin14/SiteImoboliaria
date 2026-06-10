@@ -12,12 +12,12 @@ body {
     min-height: 100vh;
 }
 
-/* ================= CABEÇALHO / NAVBAR ================= */
+/* ================= CABEÇALHO / NAVBAR REVISADO ================= */
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 6%;
+    padding: 30px 6%; /* Aumentado de 20px para 30px para dar respiro ao novo logo */
     background-color: #141414;
     border-bottom: 1px solid #c5a059;
     position: sticky;
@@ -28,20 +28,20 @@ header {
 .logo {
     display: flex;
     align-items: center;
-    gap: 16px; /* Aumentado o espaço para equilibrar com o tamanho novo */
+    gap: 18px; /* Espaço elegante e proporcional entre o símbolo e o texto */
 }
 
-/* Redimensionamento expressivo da imagem do logoT.png */
+/* Tamanho imponente e de alto destaque para o logoT.png */
 .logo-img {
-    height: 65px; /* Aumentado significativamente para dar o destaque da marcação */
+    height: 180px; 
     width: auto;
     object-fit: contain;
 }
 
-/* Redimensionamento e peso para o título principal */
+/* Tipografia marcante acompanhando a robustez do logo */
 .logo-text {
     font-family: 'Playfair Display', serif;
-    font-size: 32px; /* Título maior e imponente */
+    font-size: 38px; /* Texto grande, legível e sofisticado */
     font-weight: 700;
     letter-spacing: 2px;
     color: #ffffff;
@@ -51,7 +51,7 @@ header {
 .logo-text span {
     color: #c5a059;
     font-weight: 400;
-    font-size: 24px; /* A palavra IMÓVEIS acompanha o crescimento */
+    font-size: 28px; /* Alinhamento harmônico com a palavra TATIANA */
     letter-spacing: 1.5px;
     margin-left: 6px;
 }
