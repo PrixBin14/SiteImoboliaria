@@ -117,7 +117,7 @@ function handleLogin(event) {
     const pass = document.getElementById('auth-pass').value;
     const errorBox = document.getElementById('login-error');
 
-    // Credenciais do Administrador (Altere se necessário)
+    // Credenciais do Administrador
     if (user === "admin" && pass === "admin123") {
         errorBox.style.display = "none";
         document.getElementById('login-form').reset();
@@ -128,6 +128,7 @@ function handleLogin(event) {
     }
 }
 
+// Executa o encerramento da sessão administrativa
 function handleLogout() {
     showPage('vitrine');
 }
@@ -146,10 +147,8 @@ function handlePropertySubmit(event) {
     const novoImovel = { titulo, finalidade, preco, localizacao, imagem };
 
     if (index === -1) {
-        // Create (Adicionar Novo)
         imoveis.push(novoImovel);
     } else {
-        // Update (Editar Existente)
         imoveis[index] = novoImovel;
     }
 
@@ -193,7 +192,6 @@ function resetPropertyForm() {
 function openContactModal(propertyTitle) {
     document.getElementById('modal-prop-title').innerText = propertyTitle;
     
-    // Constrói a mensagem customizada automática
     const textoMensagem = `Olá! Tenho interesse em receber mais informações sobre o imóvel: "${propertyTitle}".`;
     const urlCompleta = `https://wa.me/${TELEFONE_CORRETOR}?text=${encodeURIComponent(textoMensagem)}`;
     

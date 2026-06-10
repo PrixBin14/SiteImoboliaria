@@ -27,14 +27,17 @@ header {
 
 .logo {
     font-family: 'Playfair Display', serif;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 700;
-    letter-spacing: 2px;
+    letter-spacing: 1.5px;
     color: #ffffff;
 }
 
 .logo span {
     color: #c5a059;
+    font-weight: 400;
+    font-size: 16px;
+    letter-spacing: 1px;
 }
 
 nav a {
