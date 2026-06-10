@@ -291,6 +291,122 @@ nav a:hover {
     .tab-btn { min-width: 45%; }
 }
 
+/* ================= RESPONSIVIDADE: CABEÇALHO E NAVBAR ================= */
+@media (max-width: 992px) {
+    header {
+        padding: 20px 4%;
+    }
+    .logo-img {
+        height: 65px;
+    }
+    .logo-text {
+        font-size: 28px;
+    }
+    .logo-text span {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        gap: 12px;
+        padding: 15px 2%;
+        text-align: center;
+    }
+    .logo {
+        justify-content: center;
+        gap: 10px;
+    }
+    .logo-img {
+        height: 50px;
+    }
+    .logo-text {
+        font-size: 24px;
+    }
+    .logo-text span {
+        font-size: 18px;
+    }
+    nav {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        gap: 12px;
+        margin-top: 5px;
+        flex-wrap: wrap;
+    }
+    nav a {
+        margin-left: 0;
+        font-size: 13px;
+        padding: 8px 12px;
+        background-color: #1c1c1c;
+        border-radius: 4px;
+        border: 1px solid #333;
+    }
+}
+
+/* ================= RESPONSIVIDADE: PESQUISA AVANÇADA ================= */
+@media (max-width: 992px) {
+    .search-bar {
+        gap: 15px;
+        padding: 20px;
+        justify-content: center;
+    }
+    .search-group {
+        min-width: 200px;
+    }
+}
+
+@media (max-width: 768px) {
+    .search-bar {
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+        max-width: 100%;
+        padding: 20px;
+        gap: 15px;
+    }
+
+    .search-group {
+        width: 100%;
+    }
+
+    .search-group select, 
+    .search-group input {
+        width: 100%;
+        height: 48px;
+        font-size: 15px;
+    }
+
+    .btn-search {
+        width: 100%;
+        height: 48px;
+        margin-top: 10px;
+        font-size: 16px;
+    }
+}
+
+/* ================= RESPONSIVIDADE: ABAS DE CIDADES ================= */
+@media (max-width: 768px) {
+    .carousel-tabs {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+        padding: 0 10px;
+    }
+
+    .tab-btn {
+        min-width: 0;
+        width: 100%;
+        padding: 12px 5px;
+        font-size: 11px;
+        text-align: center;
+    }
+    .regions-slider-section {
+        padding: 20px 0;
+    }
+}
+
 /* Barra de Filtros Alinhada */
 .search-bar {
     background-color: #141414;

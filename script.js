@@ -262,28 +262,26 @@ function resetSlideTimer() {
     autoSlideInterval = setInterval(() => moveSlide(1), 6000);
 }
 
-document.querySelectorAll('.carousel-arrow, .dot').forEach(elem => {
-    elem.addEventListener('click', resetSlideTimer);
-});
+if (document.querySelectorAll('.carousel-arrow, .dot').length) {
+    document.querySelectorAll('.carousel-arrow, .dot').forEach(elem => {
+        elem.addEventListener('click', resetSlideTimer);
+    });
+}
 
 // Vincula a ação das abas superiores aos filtros reais (Aluguel, Compra/Venda, Todos)
-function executeSearchStatus(statusValue) {
-    // Tira a classe active de todos os botões e adiciona no que foi clicado
+function executeSearchStatus(statusValue, el) {
+    // Tira a classe active de todos os botões e adiciona no que foi clicado (elemento recebido)
     document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-    
-    if (event && event.currentTarget) {
-        event.currentTarget.classList.add('active');
-    }
-    
-    // Atualiza o select de busca oculto (se aplicável) e renderiza a vitrine filtrada
+    if (el && el.classList) el.classList.add('active');
+
+    // Atualiza o select de busca (se presente) e renderiza a vitrine filtrada
     const searchStatusElem = document.getElementById('search-status');
     if (searchStatusElem) {
         searchStatusElem.value = statusValue;
     }
-    
+
     const searchCityElem = document.getElementById('search-city');
     const currentCity = searchCityElem ? searchCityElem.value : "";
-    
-    // Dispara a renderização atualizada baseada nos dados em memória
+
     renderVitrine({ status: statusValue, local: currentCity });
 }
