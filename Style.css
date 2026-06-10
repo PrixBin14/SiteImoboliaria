@@ -1,0 +1,565 @@
+/* ================= CONFIGURAÇÕES GERAIS ================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    background-color: #0d0d0d;
+    color: #e6e6e6;
+    min-height: 100vh;
+}
+
+/* ================= CABEÇALHO / NAVBAR ================= */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 6%;
+    background-color: #141414;
+    border-bottom: 1px solid #c5a059;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #ffffff;
+}
+
+.logo span {
+    color: #c5a059;
+}
+
+nav a {
+    color: #cccccc;
+    text-decoration: none;
+    margin-left: 25px;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: #c5a059;
+}
+
+.admin-link {
+    border: 1px solid #c5a059;
+    padding: 8px 15px;
+    border-radius: 4px;
+}
+
+.admin-link:hover {
+    background-color: #c5a059;
+    color: #0d0d0d;
+}
+
+/* ================= CONTROLE NATIVO DE INTERFACE SPA ================= */
+.app-page {
+    display: none;
+}
+
+.app-page.active {
+    display: block;
+}
+
+/* ================= HERO BANNER ================= */
+.hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.85)), 
+                url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=80') no-repeat center center/cover;
+    height: 60vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.hero-content h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 40px;
+    color: #ffffff;
+    margin-bottom: 12px;
+}
+
+.hero-content p {
+    color: #c5a059;
+    font-size: 18px;
+    margin-bottom: 30px;
+    font-weight: 300;
+}
+
+/* Barra de Filtros Alinhada */
+.search-bar {
+    background-color: #141414;
+    padding: 20px 30px;
+    border-radius: 4px;
+    border: 1px solid #c5a059;
+    display: inline-flex;
+    gap: 20px;
+    align-items: center;
+    text-align: left;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+    flex-wrap: wrap;
+}
+
+.search-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.search-group label {
+    font-size: 11px;
+    text-transform: uppercase;
+    color: #888888;
+    letter-spacing: 1px;
+}
+
+.search-bar select,
+.search-bar input {
+    padding: 10px 15px;
+    background-color: #0d0d0d;
+    border: 1px solid #262626;
+    color: #ffffff;
+    border-radius: 4px;
+    font-size: 14px;
+    outline: none;
+    min-width: 200px;
+}
+
+.search-bar select:focus,
+.search-bar input:focus {
+    border-color: #c5a059;
+}
+
+.btn-search {
+    background-color: #c5a059;
+    color: #0d0d0d;
+    border: none;
+    padding: 11px 35px;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 4px;
+    align-self: flex-end;
+    transition: background-color 0.3s;
+}
+
+.btn-search:hover {
+    background-color: #9e7f43;
+}
+
+/* ================= GRID DE PROPRIEDADES ================= */
+.properties-section {
+    padding: 60px 6%;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.section-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    color: #ffffff;
+}
+
+.gold-line {
+    width: 60px;
+    height: 2px;
+    background-color: #c5a059;
+    margin: 12px auto 0;
+}
+
+.properties-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+    gap: 30px;
+}
+
+.card {
+    background-color: #141414;
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid #1a1a1a;
+    position: relative;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: #c5a059;
+}
+
+.badge-status {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background-color: #c5a059;
+    color: #0d0d0d;
+    padding: 5px 12px;
+    font-weight: 700;
+    font-size: 11px;
+    border-radius: 2px;
+    text-transform: uppercase;
+}
+
+.card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.card-body h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 19px;
+    color: #ffffff;
+    margin-bottom: 6px;
+}
+
+.card-body .loc {
+    color: #888888;
+    font-size: 13px;
+    margin-bottom: 15px;
+}
+
+.card-body .price-tag {
+    color: #c5a059;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.btn-details {
+    width: 100%;
+    background-color: transparent;
+    color: #c5a059;
+    border: 1px solid #c5a059;
+    padding: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.3s;
+}
+
+.btn-details:hover {
+    background-color: #c5a059;
+    color: #0d0d0d;
+}
+
+/* ================= TELA DE AUTENTICAÇÃO ADM ================= */
+.auth-section {
+    min-height: 75vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.auth-card {
+    background-color: #141414;
+    border: 1px solid #c5a059;
+    padding: 35px;
+    border-radius: 6px;
+    width: 100%;
+    max-width: 380px;
+}
+
+.auth-card h2 {
+    font-family: 'Playfair Display', serif;
+    color: #ffffff;
+    margin-bottom: 5px;
+}
+
+.auth-card p {
+    color: #888888;
+    font-size: 13px;
+    margin-bottom: 20px;
+}
+
+.error-msg {
+    background-color: rgba(244, 67, 54, 0.15);
+    color: #f44336;
+    border: 1px solid #f44336;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 13px;
+    margin-bottom: 15px;
+    display: none;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    font-size: 11px;
+    text-transform: uppercase;
+    color: #cccccc;
+}
+
+.form-group input,
+.form-group select {
+    padding: 11px;
+    background-color: #0d0d0d;
+    border: 1px solid #262626;
+    color: #ffffff;
+    border-radius: 4px;
+    outline: none;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #c5a059;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.btn-gold-block {
+    width: 100%;
+    background-color: #c5a059;
+    color: #0d0d0d;
+    border: none;
+    padding: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.btn-gold-block:hover {
+    background-color: #9e7f43;
+}
+
+.btn-link {
+    background: none;
+    border: none;
+    color: #888888;
+    margin-top: 15px;
+    cursor: pointer;
+    width: 100%;
+}
+
+/* ================= CONTROL PAINEL ADMINISTRATIVO (CRUD) ================= */
+.admin-section {
+    padding: 40px 4%;
+}
+
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #262626;
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+}
+
+.btn-logout {
+    background-color: transparent;
+    color: #f44336;
+    border: 1px solid #f44336;
+    padding: 8px 15px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.admin-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 30px;
+}
+
+.admin-card {
+    background-color: #141414;
+    border: 1px solid #262626;
+    border-radius: 4px;
+    padding: 25px;
+}
+
+.admin-card h3 {
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 15px;
+    color: #c5a059;
+    border-bottom: 1px solid #262626;
+    padding-bottom: 8px;
+}
+
+.form-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-gold {
+    background-color: #c5a059;
+    color: #0d0d0d;
+    border: none;
+    padding: 11px 20px;
+    font-weight: 700;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.btn-cancel {
+    background-color: #333333;
+    color: #ffffff;
+    border: none;
+    padding: 11px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+/* Tabela Gerencial */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 12px;
+    border-bottom: 1px solid #262626;
+    font-size: 13.5px;
+}
+
+th {
+    background-color: #0d0d0d;
+    color: #c5a059;
+    text-transform: uppercase;
+    font-size: 11px;
+}
+
+.table-img {
+    width: 55px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 2px;
+}
+
+.actions-cell {
+    display: flex;
+    gap: 6px;
+}
+
+.btn-edit {
+    background-color: transparent;
+    color: #c5a059;
+    border: 1px solid #c5a059;
+    padding: 4px 8px;
+    cursor: pointer;
+    border-radius: 2px;
+}
+
+.btn-delete {
+    background-color: transparent;
+    color: #f44336;
+    border: 1px solid #f44336;
+    padding: 4px 8px;
+    cursor: pointer;
+    border-radius: 2px;
+}
+
+/* ================= CONTROLE COMPONENTE MODAL / WHATSAPP ================= */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    z-index: 200;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #141414;
+    padding: 30px;
+    border-radius: 4px;
+    border: 1px solid #c5a059;
+    width: 90%;
+    max-width: 440px;
+    position: relative;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #888888;
+}
+
+.btn-whatsapp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: #25D366;
+    color: #0d0d0d;
+    text-decoration: none;
+    padding: 12px;
+    font-weight: 700;
+    border-radius: 4px;
+    font-size: 14px;
+    text-transform: uppercase;
+    transition: all 0.3s;
+}
+
+.btn-whatsapp:hover {
+    background-color: #1ebd54;
+}
+
+.separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #666666;
+    font-size: 11px;
+    margin: 20px 0;
+    text-transform: uppercase;
+}
+
+.separator::before, .separator::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #262626;
+}
+
+.separator::before { margin-right: .5em; }
+.separator::after { margin-left: .5em; }
+
+footer {
+    text-align: center;
+    padding: 25px;
+    color: #444444;
+    font-size: 11px;
+    margin-top: 50px;
+}
