@@ -33,7 +33,7 @@ header {
 
 /* Tamanho imponente e de alto destaque para o logoT.png */
 .logo-img {
-    height: 180px; 
+    height: 185px; 
     width: auto;
     object-fit: contain;
 }
