@@ -43,7 +43,7 @@ Você também pode abrir `Index.html` diretamente com duplo clique, porém utili
 - Para acessar o painel administrativo clique em "Painel Admin" no topo.
 - Credenciais padrão (mock):
   - Usuário: `admin`
-  - Senha: `admin123`
+  - Senha: 
 
 No painel administrativo é possível:
 - Adicionar um novo imóvel (título, finalidade, preço, localização e URL da imagem).

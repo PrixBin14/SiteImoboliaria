@@ -3,6 +3,7 @@ let imoveis = [
     {
         titulo: "Mansão Suspensa Triplex",
         finalidade: "Venda",
+        categoria: "Casa",
         preco: "8.900.000",
         localizacao: "Bairro Nobre, Centro",
         imagem: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80"
@@ -10,6 +11,7 @@ let imoveis = [
     {
         titulo: "Apartamento Vista Mar Exclusive",
         finalidade: "Aluguel",
+        categoria: "Apartamento",
         preco: "6.500 / mês",
         localizacao: "Av. Beira Mar, Zona Sul",
         imagem: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80"
@@ -17,6 +19,7 @@ let imoveis = [
     {
         titulo: "Residência Design Contemporâneo",
         finalidade: "Venda",
+        categoria: "Casa",
         preco: "4.200.000",
         localizacao: "Condomínio Golden Hills",
         imagem: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80"
@@ -45,10 +48,13 @@ function renderVitrine(filtros = null) {
     let imoveisFiltrados = imoveis;
 
     if (filtros) {
-        if (filtros.status !== 'todos') {
+        if (filtros.status && filtros.status !== 'todos') {
             imoveisFiltrados = imoveisFiltrados.filter(item => item.finalidade === filtros.status);
         }
-        if (filtros.local.trim() !== "") {
+        if (filtros.categoria && filtros.categoria !== 'todos') {
+            imoveisFiltrados = imoveisFiltrados.filter(item => (item.categoria || '').toLowerCase() === filtros.categoria.toLowerCase());
+        }
+        if (filtros.local && filtros.local.trim() !== "") {
             const busca = filtros.local.toLowerCase();
             imoveisFiltrados = imoveisFiltrados.filter(item => 
                 item.localizacao.toLowerCase().includes(busca) || 
@@ -89,6 +95,7 @@ function renderAdminTable() {
             <tr>
                 <td><img src="${item.imagem}" class="table-img"></td>
                 <td><strong>${item.titulo}</strong><br><small style="color: #666;">${item.localizacao}</small></td>
+                <td>${item.categoria || ''}</td>
                 <td><span style="color: ${item.finalidade === 'Venda' ? '#c5a059' : '#00bcd4'}">${item.finalidade}</span></td>
                 <td><strong>R$ ${item.preco}</strong></td>
                 <td>
@@ -106,8 +113,9 @@ function renderAdminTable() {
 // ================= CONTROLES DE FILTRO / BUSCA =================
 function executeSearch() {
     const status = document.getElementById('search-status').value;
+    const categoria = document.getElementById('search-category') ? document.getElementById('search-category').value : 'todos';
     const local = document.getElementById('search-city').value;
-    renderVitrine({ status, local });
+    renderVitrine({ status, categoria, local });
 }
 
 // ================= VALIDAÇÃO DE LOGIN ADMINISTRATIVO =================
@@ -118,7 +126,7 @@ function handleLogin(event) {
     const errorBox = document.getElementById('login-error');
 
     // Credenciais do Administrador
-    if (user === "admin" && pass === "admin123") {
+    if (user === "admin" && pass === "pribin123") {
         errorBox.style.display = "none";
         document.getElementById('login-form').reset();
         showPage('admin');
@@ -140,11 +148,12 @@ function handlePropertySubmit(event) {
     const index = parseInt(document.getElementById('edit-index').value);
     const titulo = document.getElementById('prop-title').value;
     const finalidade = document.getElementById('prop-status').value;
+    const categoria = document.getElementById('prop-category') ? document.getElementById('prop-category').value : 'Casa';
     const preco = document.getElementById('prop-price').value;
     const localizacao = document.getElementById('prop-location').value;
     const imagem = document.getElementById('prop-image').value;
 
-    const novoImovel = { titulo, finalidade, preco, localizacao, imagem };
+    const novoImovel = { titulo, finalidade, categoria, preco, localizacao, imagem };
 
     if (index === -1) {
         imoveis.push(novoImovel);
@@ -167,6 +176,7 @@ function startEditProperty(index) {
     document.getElementById('edit-index').value = index;
     document.getElementById('prop-title').value = item.titulo;
     document.getElementById('prop-status').value = item.finalidade;
+    if (document.getElementById('prop-category')) document.getElementById('prop-category').value = item.categoria || 'todos';
     document.getElementById('prop-price').value = item.preco;
     document.getElementById('prop-location').value = item.localizacao;
     document.getElementById('prop-image').value = item.imagem;
@@ -186,6 +196,7 @@ function resetPropertyForm() {
     document.getElementById('form-action-title').innerText = "Adicionar Novo Imóvel";
     document.getElementById('btn-save-form').innerText = "Salvar Imóvel";
     document.getElementById('btn-cancel-edit').style.display = "none";
+    if (document.getElementById('prop-category')) document.getElementById('prop-category').value = 'Casa';
 }
 
 // ================= PROCESSAMENTO DINÂMICO DO MODAL WHATSAPP =================
