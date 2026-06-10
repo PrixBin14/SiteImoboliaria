@@ -600,3 +600,247 @@ footer {
         height: 55px;
     }
 }
+
+/* ================= SEÇÃO DO CARD DA CORRETORA ================= */
+.agent-section {
+    padding: 60px 6% 20px 6%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Detalhe das duas linhas horizontais do cabeçalho da foto */
+.gold-line-double {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    margin-top: 12px;
+}
+.gold-line-double .line-1 {
+    width: 140px;
+    height: 2px;
+    background-color: #c5a059;
+}
+.gold-line-double .line-2 {
+    width: 70px;
+    height: 2px;
+    background-color: #9e7f43;
+}
+
+/* Estrutura Principal do Card */
+.agent-card {
+    background-color: #141414;
+    border: 1px solid #262626;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 380px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    margin-top: 40px;
+    text-align: center;
+}
+
+/* Faixa superior cinza discreta simulando o design enviado */
+.agent-card-header {
+    background-color: #1a1a1a;
+    height: 90px;
+    width: 100%;
+}
+
+.agent-card-body {
+    padding: 0 30px 25px 30px;
+    position: relative;
+}
+
+/* Avatar Redondo Centralizado sobre a divisão */
+.agent-avatar {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: -65px auto 20px auto;
+    border: 4px solid #141414;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    background-color: #0d0d0d;
+}
+
+.agent-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.agent-card-body h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    color: #ffffff;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.agent-role {
+    color: #c5a059;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 2px;
+}
+
+.agent-creci {
+    color: #888888;
+    font-size: 13px;
+    font-weight: 400;
+}
+
+/* Rodapé com os botões de ação */
+.agent-card-footer {
+    border-top: 1px solid #262626;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    background-color: #111111;
+}
+
+/* Botões de Ação Quadrados Minimalistas */
+.agent-action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    background-color: #141414;
+    border: 1px solid #333333;
+    border-radius: 6px;
+    color: #cccccc;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.agent-action-btn:hover {
+    color: #0d0d0d;
+    background-color: #c5a059;
+    border-color: #c5a059;
+    transform: translateY(-2px);
+}
+
+/* ================= BANNER INSTAGRAM ================= */
+.instagram-banner {
+    position: relative;
+    background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), 
+                url('xanxeresol.jpg') no-repeat center center/cover;
+    padding: 60px 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-top: 1px solid #262626;
+    border-bottom: 1px solid #262626;
+}
+
+.insta-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap; /* Garante que quebre linha elegantemente no celular */
+    max-width: 1200px;
+    width: 100%;
+}
+
+.insta-text {
+    font-size: 20px;
+    color: #ffffff;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+}
+
+/* Container da Foto de Perfil + Borda Gradiente */
+.insta-profile-wrapper {
+    position: relative;
+    width: 76px;
+    height: 76px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.insta-avatar {
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+    overflow: hidden;
+    padding: 3px;
+    background: #141414; /* Espaço escuro entre a foto e a borda colorida */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.insta-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+/* Anel de gradiente oficial do Instagram */
+.insta-profile-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    border-radius: 50%;
+    padding: 2.5px; /* Espessura da borda */
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    pointer-events: none;
+}
+
+/* Selo com o Ícone do Instagram no canto da foto */
+.insta-icon-badge {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    background: linear-gradient(45deg, #f09433 0%, #dc2743 50%, #bc1888 100%);
+    color: #ffffff;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #141414;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+}
+
+/* Link do @Usuario */
+.insta-handle {
+    font-size: 22px;
+    color: #ffffff;
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    transition: color 0.3s ease;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+}
+
+.insta-handle:hover {
+    color: #c5a059; /* Brilho em ouro ao passar o mouse */
+}
+
+/* Ajustes de responsividade para telas pequenas */
+@media (max-width: 600px) {
+    .insta-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+    }
+    .insta-text {
+        font-size: 18px;
+    }
+    .insta-handle {
+        font-size: 19px;
+    }
+}
