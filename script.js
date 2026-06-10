@@ -1,4 +1,3 @@
-// ================= BANCO DE DADOS EM MEMÓRIA (MOCK DATA) =================
 let imoveis = [
     {
         titulo: "Mansão Suspensa Triplex",
@@ -25,11 +24,8 @@ let imoveis = [
         imagem: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80"
     }
 ];
+const TELEFONE_CORRETOR = "5549999999999";
 
-// Configuração Global: Insira seu número de WhatsApp com DDD abaixo
-const TELEFONE_CORRETOR = "5549999999999"; 
-
-// ================= SISTEMA NATIVO DE NAVEGAÇÃO SPA =================
 function showPage(pageId) {
     document.querySelectorAll('.app-page').forEach(page => {
         page.classList.remove('active');
@@ -38,12 +34,9 @@ function showPage(pageId) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// ================= RENDERIZADORES DO FRONT-END =================
-
-// 1. Renderiza os cards na Vitrine Pública
 function renderVitrine(filtros = null) {
     const grid = document.getElementById('public-properties-grid');
-    grid.innerHTML = ""; 
+    grid.innerHTML = "";
 
     let imoveisFiltrados = imoveis;
 
@@ -56,8 +49,8 @@ function renderVitrine(filtros = null) {
         }
         if (filtros.local && filtros.local.trim() !== "") {
             const busca = filtros.local.toLowerCase();
-            imoveisFiltrados = imoveisFiltrados.filter(item => 
-                item.localizacao.toLowerCase().includes(busca) || 
+            imoveisFiltrados = imoveisFiltrados.filter(item =>
+                item.localizacao.toLowerCase().includes(busca) ||
                 item.titulo.toLowerCase().includes(busca)
             );
         }
@@ -85,7 +78,6 @@ function renderVitrine(filtros = null) {
     });
 }
 
-// 2. Renderiza a tabela dentro do Painel Admin (Tabela CRUD)
 function renderAdminTable() {
     const tbody = document.getElementById('admin-table-body');
     tbody.innerHTML = "";
@@ -110,7 +102,6 @@ function renderAdminTable() {
     });
 }
 
-// ================= CONTROLES DE FILTRO / BUSCA =================
 function executeSearch() {
     const status = document.getElementById('search-status').value;
     const categoria = document.getElementById('search-category') ? document.getElementById('search-category').value : 'todos';
@@ -118,14 +109,12 @@ function executeSearch() {
     renderVitrine({ status, categoria, local });
 }
 
-// ================= VALIDAÇÃO DE LOGIN ADMINISTRATIVO =================
 function handleLogin(event) {
     event.preventDefault();
     const user = document.getElementById('auth-user').value;
     const pass = document.getElementById('auth-pass').value;
     const errorBox = document.getElementById('login-error');
 
-    // Credenciais do Administrador
     if (user === "admin" && pass === "pribin123") {
         errorBox.style.display = "none";
         document.getElementById('login-form').reset();
@@ -136,12 +125,10 @@ function handleLogin(event) {
     }
 }
 
-// Executa o encerramento da sessão administrativa
 function handleLogout() {
     showPage('vitrine');
 }
 
-// ================= OPERAÇÕES DO BANCO DE DADOS (CRUD) =================
 function handlePropertySubmit(event) {
     event.preventDefault();
     
@@ -199,7 +186,6 @@ function resetPropertyForm() {
     if (document.getElementById('prop-category')) document.getElementById('prop-category').value = 'Casa';
 }
 
-// ================= PROCESSAMENTO DINÂMICO DO MODAL WHATSAPP =================
 function openContactModal(propertyTitle) {
     document.getElementById('modal-prop-title').innerText = propertyTitle;
     
@@ -226,16 +212,14 @@ function submitForm(event) {
     document.getElementById('contact-form').reset();
 }
 
-// Inicializar Vitrine ao Carregar
 window.onload = function() { renderVitrine(); };
 
-// ================= ENGINE DO CARROSSEL DE CIDADES =================
 let slideIndex = 0;
 const slides = document.querySelectorAll('.carousel-slide');
 const dots = document.querySelectorAll('.dot');
 
 function showSlides(index) {
-    if (slides.length === 0) return; // Segurança caso a seção mude
+    if (slides.length === 0) return;
     if (index >= slides.length) slideIndex = 0;
     if (index < 0) slideIndex = slides.length - 1;
 
@@ -254,7 +238,6 @@ function currentSlide(index) {
     showSlides(slideIndex = index);
 }
 
-// Rotação Automática Suave a cada 6 segundos
 let autoSlideInterval = setInterval(() => moveSlide(1), 6000);
 
 function resetSlideTimer() {
@@ -268,13 +251,10 @@ if (document.querySelectorAll('.carousel-arrow, .dot').length) {
     });
 }
 
-// Vincula a ação das abas superiores aos filtros reais (Aluguel, Compra/Venda, Todos)
 function executeSearchStatus(statusValue, el) {
-    // Tira a classe active de todos os botões e adiciona no que foi clicado (elemento recebido)
     document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
     if (el && el.classList) el.classList.add('active');
 
-    // Atualiza o select de busca (se presente) e renderiza a vitrine filtrada
     const searchStatusElem = document.getElementById('search-status');
     if (searchStatusElem) {
         searchStatusElem.value = statusValue;
