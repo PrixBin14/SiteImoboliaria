@@ -86,7 +86,7 @@
 }
 
 .footer-logo-img {
-    height: 65px; /* Tamanho proporcional para a logoT.jpg */
+    height: 175px; /* Tamanho proporcional para a logoT.jpg */
     width: auto;
     object-fit: contain;
 }
@@ -222,25 +222,30 @@
     font-family: 'Playfair Display', serif;
 }
 
-/* Grid de Conteúdo */
-.anuncie-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 60px 20px 0 20px;
-}
-
 .anuncie-grid {
     display: flex;
-    gap: 50px;
-    align-items: flex-start;
+    flex-direction: row; /* Força o alinhamento lado a lado */
+    align-items: center; /* Alinha a imagem e o texto verticalmente */
+    gap: 40px;           /* Espaçamento entre a foto e o texto */
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-/* Coluna da Imagem / Dropzone */
 .anuncie-photo-column {
-    flex: 1;
-    min-width: 380px;
+    flex: 1; /* A imagem ocupa metade do espaço */
+    max-width: 450px;
 }
 
+.anuncie-text-column {
+    flex: 1; /* O texto ocupa a outra metade */
+}
+
+/* Container para centralizar o botão */
+.button-center-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
 /* Caixa de Upload Customizada para o Tema Escuro */
 .upload-placeholder-zone {
     width: 100%;
@@ -433,88 +438,6 @@
     }
 }
 
-/* Elemento de visualização da foto */
-.image-preview-element {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-
-/* Coluna de Texto */
-.anuncie-text-column {
-    flex: 1.4;
-}
-
-.anuncie-text-column h2 {
-    font-size: 28px;
-    color: #111111;
-    font-weight: 600;
-    margin: 0 0 10px 0;
-}
-
-.anuncie-gold-line {
-    width: 80px;
-    height: 2px;
-    background-color: #c5a059;
-    margin-bottom: 30px;
-}
-
-.anuncie-paragraphs p {
-    font-size: 15px;
-    line-height: 1.7;
-    color: #555555;
-    margin-bottom: 20px;
-}
-
-.anuncie-paragraphs strong {
-    color: #111111;
-}
-
-.highlight-commitment {
-    border-left: 3px solid #c5a059;
-    padding-left: 15px;
-    font-style: italic;
-    color: #444444 !important;
-}
-
-/* Botão de Envio */
-.btn-anunciar-submit {
-    background-color: #b08c46;
-    color: #ffffff;
-    border: none;
-    padding: 15px 35px;
-    font-size: 15px;
-    font-weight: 600;
-    border-radius: 4px;
-    cursor: pointer;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-top: 15px;
-    transition: background-color 0.3s;
-}
-
-.btn-anunciar-submit:hover {
-    background-color: #947335;
-}
-
-/* Responsividade */
-@media (max-width: 900px) {
-    .anuncie-grid {
-        flex-direction: column;
-    }
-    .anuncie-photo-column {
-        width: 100%;
-        min-width: 100%;
-    }
-    .upload-placeholder-zone {
-        height: 380px;
-    }
-}
-
-
 body {
     background-color: #0d0d0d;
     color: #e6e6e6;
@@ -546,7 +469,7 @@ header {
 }
 
 .logo-img {
-    height: 72px; 
+    height: 250px; 
     width: auto;
     object-fit: contain;
 }
@@ -2718,4 +2641,14 @@ footer {
     #public-properties-grid .card-body h3 {
         font-size: 16px !important; /* Devolve o tamanho legível ao título no mobile */
     }
+}
+
+.form-card-container {
+    background-color: #1a1a1a; /* Um cinza bem escuro para contrastar com o fundo preto */
+    padding: 30px;
+    border-radius: 12px;
+    border: 1px solid #333; /* Uma borda sutil para definir o bloco */
+    max-width: 900px;
+    margin: 40px auto; /* Centraliza o bloco na página */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }

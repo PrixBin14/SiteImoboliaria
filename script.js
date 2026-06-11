@@ -1038,6 +1038,42 @@ async function submitAnuncio(event) {
     }
 }
 
+// Configuração do WhatsApp
+const TELEFONE_WHATSAPP = "5549999999999"; // Substitua pelo número da Tatiane
+
+// 1. Função para levar até o formulário
+function scrollToForm() {
+    const formSection = document.getElementById('anuncie-form-section');
+    if (formSection) {
+        formSection.scrollIntoView({ behavior: 'smooth' });
+    }
+}
+
+// 2. Função que pega os dados e abre o WhatsApp
+function submitAnuncio(event) {
+    event.preventDefault(); // Impede o envio padrão
+
+    // Captura os valores
+    const nome = document.getElementById('anunciante-nome').value;
+    const email = document.getElementById('anunciante-email').value;
+    const tel = document.getElementById('anunciante-telefone').value;
+    const titulo = document.getElementById('anuncio-titulo').value;
+    const preco = document.getElementById('anuncio-preco').value;
+    const msg = document.getElementById('anuncio-mensagem').value;
+
+    // Monta a mensagem formatada
+    const textoWhatsApp = `*Olá, Tatiane! Gostaria de anunciar meu imóvel:*%0A%0A` +
+                          `👤 *Nome:* ${nome}%0A` +
+                          `📧 *E-mail:* ${email}%0A` +
+                          `📱 *Telefone:* ${tel}%0A` +
+                          `🏠 *Título do Imóvel:* ${titulo}%0A` +
+                          `💰 *Preço:* ${preco}%0A` +
+                          `📝 *Observações:* ${msg}`;
+
+    // Abre o WhatsApp
+    window.open(`https://wa.me/${TELEFONE_WHATSAPP}?text=${textoWhatsApp}`, '_blank');
+}
+
 window.addEventListener('DOMContentLoaded', () => {
     setupAnuncieDropZone();
 });
