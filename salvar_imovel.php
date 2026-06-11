@@ -14,30 +14,46 @@ try {
     $precoDecimal = floatval(preg_replace('/[^0-9.]/', '', $precoLimpo));
 
     $sql = "INSERT INTO imoveis (
-                titulo, finalidade, categoria, preco, localizacao, imagem_url, 
+                codigo, titulo, finalidade, categoria, preco, localizacao, imagem_url, 
                 quartos, banheiros, salas, cozinhas, garagem, area_total, area_construida, outros_comodos
             ) VALUES (
-                :titulo, :finalidade, :categoria, :preco, :localizacao, :imagem_url, 
+                :codigo, :titulo, :finalidade, :categoria, :preco, :localizacao, :imagem_url, 
                 :quartos, :banheiros, :salas, :cozinhas, :garagem, :area_total, :area_construida, :outros_comodos
             )";
 
     $stmt = $pdo->prepare($sql);
 
+    $areaTotalRaw = isset($dados['areaTotal']) ? $dados['areaTotal'] : null;
+    $areaConstruidaRaw = isset($dados['areaConstruida']) ? $dados['areaConstruida'] : null;
+
+    $areaTotalNum = null;
+    if ($areaTotalRaw !== null && $areaTotalRaw !== '') {
+        $areaTotalNum = floatval(preg_replace('/[^0-9\.]/', '', $areaTotalRaw));
+    }
+
+    $areaConstruidaNum = null;
+    if ($areaConstruidaRaw !== null && $areaConstruidaRaw !== '') {
+        $areaConstruidaNum = floatval(preg_replace('/[^0-9\.]/', '', $areaConstruidaRaw));
+    }
+
+    $codigo = isset($dados['codigo']) && trim($dados['codigo']) !== '' ? $dados['codigo'] : ('REF-' . rand(1000, 9999));
+
     $stmt->execute([
-        ':titulo'         => $dados['titulo'],
-        ':finalidade'     => $dados['finalidade'],
-        ':categoria'      => $dados['categoria'],
+        ':codigo'         => $codigo,
+        ':titulo'         => isset($dados['titulo']) ? $dados['titulo'] : null,
+        ':finalidade'     => isset($dados['finalidade']) ? $dados['finalidade'] : null,
+        ':categoria'      => isset($dados['categoria']) ? $dados['categoria'] : null,
         ':preco'          => $precoDecimal,
-        ':localizacao'    => $dados['localizacao'],
-        ':imagem_url'     => $dados['imagem'],
-        ':quartos'        => intval($dados['quartos']),
-        ':banheiros'      => intval($dados['banheiros']),
-        ':salas'          => intval($dados['salas']),
-        ':cozinhas'       => intval($dados['cozinhas']),
-        ':garagem'        => intval($dados['garagem']),
-        ':area_total'     => intval(preg_replace('/[^0-9]/', '', $dados['areaTotal'])),
-        ':area_construida'=> intval(preg_replace('/[^0-9]/', '', $dados['areaConstruida'])),
-        ':outros_comodos' => $dados['outrosComodos']
+        ':localizacao'    => isset($dados['localizacao']) ? $dados['localizacao'] : null,
+        ':imagem_url'     => isset($dados['imagem']) ? $dados['imagem'] : null,
+        ':quartos'        => isset($dados['quartos']) ? intval($dados['quartos']) : 0,
+        ':banheiros'      => isset($dados['banheiros']) ? intval($dados['banheiros']) : 0,
+        ':salas'          => isset($dados['salas']) ? intval($dados['salas']) : 0,
+        ':cozinhas'       => isset($dados['cozinhas']) ? intval($dados['cozinhas']) : 0,
+        ':garagem'        => isset($dados['garagem']) ? intval($dados['garagem']) : 0,
+        ':area_total'     => $areaTotalNum,
+        ':area_construida'=> $areaConstruidaNum,
+        ':outros_comodos' => isset($dados['outrosComodos']) ? $dados['outrosComodos'] : null
     ]);
 
     echo json_encode(["sucesso" => true, "mensagem" => "Imóvel guardado com sucesso permanentemente!"]);

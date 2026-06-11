@@ -7,20 +7,24 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome CDN para ícones sociais no rodapé -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-p6O6QYyXQ2c1Qm1b0y0l1e7FQYb8q3zKZ8nL1rG9l9s7k6v0h2K1i2V5Yk3Z0q4r7J9V1b2w3x4y5z6a7b8c==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
 </head>
     
 <body>
 
-    <header>
+    <header class="main-header">
         <div class="logo">
             <img src="logoT.png" alt="Logo Tatiane Imóveis" class="logo-img">
             <div class="logo-text">TATIANE <span>IMÓVEIS</span></div>
         </div>
-        <nav id="main-nav">
-            <a href="#" onclick="showPage('vitrine')">Início</a>
-            <a href="#" onclick="showPage('imoveis')">Imóveis</a>
-            <a href="#" class="admin-link" onclick="showPage('login')">Painel</a>
+        <nav id="main-nav" class="header-nav">
+            <a href="#" onclick="navegarPara('vitrine')">INÍCIO</a>
+            <a href="#" onclick="navegarPara('imoveis')">IMÓVEIS</a>
+            <!-- BOTÃO DE ANÚNCIO INTEGRADO À PÁGINA DE ANÚNCIOS -->
+            <a href="#" class="btn-anuncie-header" onclick="navegarPara('anuncie')">ANUNCIE SEU IMÓVEL</a>
+            <a href="#" class="btn-painel-header" onclick="navegarPara('login')">PAINEL</a>
         </nav>
     </header>
 
@@ -51,6 +55,7 @@
                             <option value="Terreno">Terreno</option>
                         </select>
                     </div>
+                    
                     <div class="search-group">
                         <label for="search-city">Cidade/Bairro</label>
                         <input type="text" id="search-city" placeholder="Ex: Centro, Jardins...">
@@ -102,6 +107,169 @@
         </section>
     </main>
 
+    <main id="page-detalhes" class="app-page">
+        <div class="breadcrumb">
+            <a href="#" onclick="showPage('vitrine')">Início</a> <span>&gt;</span> 
+            <a href="#" onclick="showPage('imoveis')">Imóveis</a> <span>&gt;</span> 
+            <span id="detalhe-ref-topo" style="color: #c5a059;">REF-000</span>
+        </div>
+
+        <div class="details-wrapper">
+            <div class="details-main-content">
+                <h1 id="detalhe-titulo">Título do Imóvel de Luxo</h1>
+                <p id="detalhe-localizacao" class="details-location">📍 Localização do Imóvel</p>
+            
+                <div class="details-gallery">
+                    <img id="detalhe-imagem" src="" alt="Foto do Imóvel">
+                </div>
+
+                <div class="details-section">
+                    <h2>Ficha Técnica</h2>
+                    <div class="specs-table-grid">
+                        <div class="spec-item"><span>Quartos</span><strong id="detalhe-quartos">0</strong></div>
+                        <div class="spec-item"><span>Banheiros</span><strong id="detalhe-banheiros">0</strong></div>
+                        <div class="spec-item"><span>Salas</span><strong id="detalhe-salas">0</strong></div>
+                        <div class="spec-item"><span>Cozinhas</span><strong id="detalhe-cozinhas">0</strong></div>
+                        <div class="spec-item"><span>Vagas de Garagem</span><strong id="detalhe-vagas">0</strong></div>
+                        <div class="spec-item"><span>Metragem Total</span><strong id="detalhe-area-total">0 m²</strong></div>
+                        <div class="spec-item"><span>Área Construída</span><strong id="detalhe-area-construida">0 m²</strong></div>
+                    </div>
+                </div>
+
+                <div class="details-section">
+                    <h2>Descrição e Cômodos Adicionais</h2>
+                    <p id="detalhe-descricao" class="details-description-text">
+                        Nenhum detalhe adicional informado.
+                    </p>
+                </div>
+
+                <!-- SEÇÃO MAPA REGIONAL (Inspirado na Captura de Tela) -->
+                <div class="details-section map-region-section">
+                    <h2 id="detalhe-regiao-titulo">Conheça a região do bairro</h2>
+                    
+                    <div class="map-banner-container">
+                        <a id="detalhe-btn-maps" href="#" target="_blank" class="btn-explore-neighborhood">
+                            Explore o bairro
+                        </a>
+                    </div>
+                </div>
+
+                <!-- SEÇÃO FORMULÁRIO DE CAPTURA HORIZONTAL -->
+                <div class="details-section contact-form-section">
+                    <h2>Gostou deste apartamento?</h2>
+                    <p>Preencha o formulário abaixo e tire todas suas dúvidas sem compromisso.</p>
+                    
+                    <form id="detail-lead-form" class="horizontal-contact-form" onsubmit="handleLeadSubmit(event)">
+                        <input type="text" placeholder="Nome" required>
+                        <input type="email" placeholder="E-mail" required>
+                        
+                        <div class="phone-input-group">
+                            <span class="flag-icon">🇧🇷 (+55)</span>
+                            <input type="tel" placeholder="Ex: (00) 00000-0000" required>
+                        </div>
+                        
+                        <button type="submit" class="btn-submit-lead">Entrar em contato</button>
+                    </form>
+                </div>
+            </div>
+
+            <aside class="details-sidebar-card">
+                <div class="sticky-contact-box">
+                    <span id="detalhe-badge" class="badge-status">Venda</span>
+                    <div class="price-tag-container">
+                        <small>Valor do Investimento</small>
+                        <h2 id="detalhe-preco">R$ 0,00</h2>
+                    </div>
+                
+                    <div class="broker-info">
+                        <div class="broker-avatar">T</div>
+                        <div>
+                            <h4>Tatiane Soluções Imobiliárias</h4>
+                            <p>Gestão & Alto Padrão</p>
+                        </div>
+                    </div>
+
+                    <a id="detalhe-btn-whatsapp" href="#" target="_blank" class="btn-whatsapp-direct">
+                        💬 Fale Direto no WhatsApp
+                    </a>
+                
+                    <button class="btn-back-catalog" onclick="showPage('imoveis')">
+                        ← Voltar para a Listagem
+                    </button>
+                </div>
+            </aside>
+        </div>
+
+        <div class="related-properties-section">
+            <h2>Outras Opções Exclusivas para Você</h2>
+            <div id="related-properties-grid" class="properties-grid-layout">
+            </div>
+        </div>
+    </main>
+
+    <!-- ================= PÁGINA: ANUNCIE ================= -->
+    <section id="page-anuncie" class="app-page anuncie-section">
+        <div class="anuncie-banner">
+            <div class="anuncie-banner-overlay">
+                <h1>Anuncie seu imóvel com exclusividade</h1>
+            </div>
+        </div>
+
+        <div class="anuncie-container">
+            <div class="anuncie-grid">
+                <div class="anuncie-photo-column">
+                    <div id="upload-content-wrapper" class="upload-placeholder-zone">
+                        <div class="upload-inside-content">
+                            <div class="upload-icon-circle"><i class="fa fa-cloud-upload-alt"></i></div>
+                            <h3>Arraste a imagem do seu imóvel aqui</h3>
+                            <p>JPG/PNG até 5MB. Iremos otimizar a imagem automaticamente.</p>
+                            <button class="upload-badge">Selecionar arquivo</button>
+                        </div>
+                        <img id="image-preview" class="image-preview-element" src="#" alt="Preview" style="display:none;" />
+                    </div>
+                    <input type="file" id="file-input" accept="image/*" style="display:none;" onchange="previewImage(event)">
+                </div>
+
+                <div class="anuncie-text-column">
+                    <h2>Envie seu anúncio</h2>
+                    <div class="anuncie-gold-line"></div>
+                    <div class="anuncie-paragraphs">
+                        <p>Preencha os dados abaixo que nossa equipe fará a triagem e contato para publicar seu imóvel.</p>
+                    </div>
+
+                    <form id="anuncie-form" onsubmit="submitAnuncio(event)">
+                        <div class="form-group">
+                            <label>Nome</label>
+                            <input id="anunciante-nome" required>
+                        </div>
+                        <div class="form-group">
+                            <label>E-mail</label>
+                            <input id="anunciante-email" type="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Telefone</label>
+                            <input id="anunciante-telefone" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Título do Anúncio</label>
+                            <input id="anuncio-titulo" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Preço</label>
+                            <input id="anuncio-preco">
+                        </div>
+                        <div class="form-group">
+                            <label>Mensagem</label>
+                            <textarea id="anuncio-mensagem"></textarea>
+                        </div>
+                        <div id="anuncio-status" style="color:#c5a059; margin-bottom:8px;"></div>
+                        <button type="submit" class="btn-anunciar-submit">Enviar Anúncio</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- ================= NOVA PÁGINA: LISTAGEM DE IMÓVEIS ================= -->
     <main id="page-imoveis" class="app-page">
         <div class="breadcrumb">
@@ -112,6 +280,11 @@
             <aside class="filter-sidebar">
                 <h3>Filtrar</h3>
                 
+                <div class="filter-group">
+                    <label>Buscar por Código (Ref)</label>
+                    <input type="text" id="sidebar-code" placeholder="Ex: REF-102">
+                </div>
+
                 <div class="filter-group">
                     <label>Transação</label>
                     <select id="sidebar-status">
@@ -136,37 +309,89 @@
                     <input type="text" id="sidebar-city" placeholder="Digite o bairro ou cidade">
                 </div>
 
-                <div class="filter-row flex-3-inputs">
-                    <div class="filter-group">
-                        <label>Quartos</label>
-                        <select id="sidebar-bedrooms">
-                            <option value="todos">Qualquer</option>
-                            <option value="1">1+</option>
-                            <option value="2">2+</option>
-                            <option value="3">3+</option>
-                            <option value="4">4+</option>
-                        </select>
-                    </div>
-                    <div class="filter-group">
-                        <label>Banheiros</label>
-                        <select id="sidebar-bathrooms">
-                            <option value="todos">Qualquer</option>
-                            <option value="1">1+</option>
-                            <option value="2">2+</option>
-                            <option value="3">3+</option>
-                        </select>
-                    </div>
-                    <div class="filter-group">
-                        <label>Vagas</label>
-                        <select id="sidebar-garages">
-                            <option value="todos">Qualquer</option>
-                            <option value="1">1+</option>
-                            <option value="2">2+</option>
-                            <option value="3">3+</option>
-                        </select>
+                <!-- ================= SELETORES EM GRADE (BOTÕES) ================= -->
+                <!-- Quartos -->
+                <div class="filter-group">
+                    <label>Quartos</label>
+                    <div class="btn-group-grid">
+                        <label class="btn-radio">
+                            <input type="radio" name="sidebar-bedrooms" value="1">
+                            <span>1</span>
+                        </label>
+                        <label class="btn-radio">
+                            <input type="radio" name="sidebar-bedrooms" value="2">
+                            <span>2</span>
+                        </label>
+                        <label class="btn-radio">
+                            <input type="radio" name="sidebar-bedrooms" value="3">
+                            <span>3</span>
+                        </label>
+                        <label class="btn-radio">
+                            <input type="radio" name="sidebar-bedrooms" value="4">
+                            <span>4+</span>
+                        </label>
                     </div>
                 </div>
 
+                <!-- Área Mínima e Máxima (Conforme Imagem) -->
+                <div class="filter-row">
+                    <div class="filter-group">
+                        <label>Área mínima (m²)</label>
+                        <input type="number" id="sidebar-area-min" placeholder="">
+                    </div>
+                    <div class="filter-group">
+                        <label>Área máxima (m²)</label>
+                        <input type="number" id="sidebar-area-max" placeholder="">
+                    </div>
+                </div>
+
+                <!-- Banheiros -->
+                <div class="filter-group">
+                    <label>Banheiros</label>
+                    <div class="btn-group-grid">
+                        <label class="btn-radio">
+                            <input type="radio" name="sidebar-bathrooms" value="1">
+                            <span>1</span>
+                        </label>
+                        <label class="btn-radio">
+                            <input type="radio" name="sidebar-bathrooms" value="2">
+                            <span>2</span>
+                        </label>
+                        <label class="btn-radio">
+                            <input type="radio" name="sidebar-bathrooms" value="3">
+                            <span>3</span>
+                        </label>
+                        <label class="btn-radio">
+                            <input type="radio" name="sidebar-bathrooms" value="4">
+                            <span>4+</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Vagas de Garagem -->
+                <div class="filter-group">
+                    <label>Vagas</label>
+                    <div class="btn-group-grid">
+                        <label class="btn-radio">
+                            <input type="radio" name="sidebar-garages" value="1">
+                            <span>1</span>
+                        </label>
+                        <label class="btn-radio">
+                            <input type="radio" name="sidebar-garages" value="2">
+                            <span>2</span>
+                        </label>
+                        <label class="btn-radio">
+                            <input type="radio" name="sidebar-garages" value="3">
+                            <span>3</span>
+                        </label>
+                        <label class="btn-radio">
+                            <input type="radio" name="sidebar-garages" value="4">
+                            <span>4+</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- (Você pode manter a filter-row de Preço mínimo/máximo logo abaixo, se desejar) -->
                 <div class="filter-row">
                     <div class="filter-group">
                         <label>Preço mínimo</label>
@@ -450,9 +675,150 @@
             </div>
         </section>
 
-    <footer>
-        <p>2026 ⓒ Prix&Bin design.</p>
-    </footer>
+<section id="page-anuncie" class="app-page">
+    
+    <section class="anuncie-banner">
+        <div class="anuncie-banner-overlay">
+            <h1>Anuncie seu imóvel comigo</h1>
+        </div>
+    </section>
+
+    <section class="anuncie-container">
+        <div class="anuncie-grid">
+            
+            <div class="anuncie-photo-column">
+                <div class="upload-placeholder-zone" onclick="document.getElementById('file-input').click()">
+                    <input type="file" id="file-input" accept="image/*" style="display: none;" onchange="previewImage(event)">
+                    <div class="upload-inside-content" id="upload-content-wrapper">
+                        <div class="upload-icon-circle">
+                            <i class="fa-solid fa-cloud-arrow-up"></i>
+                        </div>
+                        <h3>Sua Foto ou Logo Aqui</h3>
+                        <p>Clique ou arraste para preencher este espaço com sua imagem de perfil profissional</p>
+                        <span class="upload-badge">Campo Obrigatório</span>
+                    </div>
+                    <img id="image-preview" class="image-preview-element" src="#" alt="Sua foto" style="display: none;">
+                </div>
+            </div>
+
+            <div class="anuncie-text-column">
+                <h2>Exclusividade e estratégia para o seu imóvel</h2>
+                <div class="anuncie-gold-line"></div>
+                
+                <div class="anuncie-paragraphs">
+                    <p>
+                        Olá, sou <strong>Tatiane</strong>, especialista no mercado imobiliário, e entendo que cada empreendimento de alto padrão é único e deve ser apresentado com a mesma sofisticação que carrega em seus detalhes. Por isso, criamos um processo completo de divulgação, unindo estratégia, estética e tecnologia para garantir ao seu patrimônio a visibilidade que ele merece.
+                    </p>
+                    <p>
+                        <strong>Produção profissional de fotos e vídeos:</strong> Registramos cada ambiente com imagens de alto impacto, revelando o estilo, a exclusividade e os diferenciais do seu imóvel.
+                    </p>
+                    <p>
+                        <strong>Destaque em nosso portfólio digital:</strong> Cada lançamento ou imóvel anunciado ganha lugar em uma vitrine online exclusiva, conectada a compradores altamente qualificados.
+                    </p>
+                    <p>
+                        <strong>Campanhas em redes sociais:</strong> Estratégias direcionadas no Instagram, Facebook e YouTube ampliam o alcance e despertam o interesse do público certo.
+                    </p>
+                    <p>
+                        Todo o atendimento é conduzido pela nossa equipe com discrição, confiança e segurança, garantindo que cada negociação aconteça de forma clara e tranquila.
+                    </p>
+                    <p class="highlight-commitment">
+                        Nosso compromisso é transformar cada anúncio em uma experiência estratégica, capaz de gerar desejo, credibilidade e resultados reais. Porque aqui, anunciar é criar conexões entre pessoas, sonhos e oportunidades.
+                    </p>
+                </div>
+
+                <button class="btn-anunciar-submit" onclick="scrollToContactForm()">
+                    Anunciar meu imóvel
+                </button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FORMULÁRIO DE ANÚNCIO (Submissão ao backend) -->
+    <section class="anuncie-form-section">
+        <div class="anuncie-form-container">
+            <h3>Preencha seus dados para anunciar</h3>
+            <form id="anuncie-form" onsubmit="submitAnuncio(event)">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Seu nome</label>
+                        <input type="text" id="anunciante-nome" required>
+                    </div>
+                    <div class="form-group">
+                        <label>E-mail</label>
+                        <input type="email" id="anunciante-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Telefone</label>
+                        <input type="tel" id="anunciante-telefone" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group" style="flex:1">
+                        <label>Título do imóvel</label>
+                        <input type="text" id="anuncio-titulo" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Preço (opcional)</label>
+                        <input type="text" id="anuncio-preco" placeholder="Ex: 1.250.000">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group" style="flex:1">
+                        <label>Mensagem / Observações</label>
+                        <textarea id="anuncio-mensagem" rows="4" placeholder="Descrição breve do imóvel..."></textarea>
+                    </div>
+                </div>
+
+                <div style="margin-top:16px; margin-bottom:8px;">
+                    <small>Imagem selecionada para upload será enviada junto ao formulário (JPG/PNG, máximo 5MB). Você pode arrastar a imagem para a caixa acima ou clicar nela.</small>
+                </div>
+
+                <div class="form-row" style="margin-top:18px; gap:12px; align-items:center;">
+                    <button type="submit" class="btn-anunciar-submit">Enviar Anúncio</button>
+                    <div id="anuncio-status" style="color:#c5a059; font-weight:600; display:inline-block; margin-left:12px;"></div>
+                </div>
+            </form>
+        </div>
+    </section>
+</section>
+
+<footer class="main-footer">
+    <div class="footer-container">
+        <div class="footer-column footer-menu">
+            <h3>Menu</h3>
+            <div class="footer-underline"></div>
+            <ul>
+                <li><a href="#" onclick="navegarPara('vitrine')">Início</a></li>
+                <li><a href="#" onclick="navegarPara('imoveis')">Imóveis</a></li>
+                <li><a href="#" onclick="navegarPara('anuncie')">Anuncie seu imóvel aqui</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-column footer-branding">
+            <div class="brand-block">
+                <img src="logoT.png" alt="Logo T" class="footer-logo-img">
+                <div class="brand-text">
+                    <h2 class="brand-name">TATIANE</h2>
+                    <span class="brand-cursive">Soluções Imobiliárias</span>
+                </div>
+            </div>
+            <p class="footer-creci">CRECI: 29000</p>
+            <p class="footer-disclaimer">
+                Os valores, condições e disponibilidade dos imóveis estão sujeitos a alterações sem aviso prévio.
+            </p>
+        </div>
+    </div> 
+
+    <div class="footer-bottom">
+        <div class="footer-bottom-container">
+            <p>© 2026 Prix&Bin design.</p>
+        </div>
+    </div>
+</footer>
+
 
     <script src="script.js"></script>
 </body>

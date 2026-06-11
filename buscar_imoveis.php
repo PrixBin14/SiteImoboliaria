@@ -10,6 +10,8 @@ $bathrooms = $_GET['banheiros'] ?? 'todos';
 $garages   = $_GET['garagem'] ?? 'todos';
 $priceMin  = floatval($_GET['preco_min'] ?? 0);
 $priceMax  = floatval($_GET['preco_max'] ?? 999999999);
+$areaMin   = floatval($_GET['area_min'] ?? 0);
+$areaMax   = floatval($_GET['area_max'] ?? 999999999);
 
 $sql = "SELECT * FROM imoveis WHERE 1=1";
 $params = [];
@@ -51,6 +53,15 @@ if ($priceMin > 0) {
 if ($priceMax > 0 && $priceMax < 999999999) {
     $sql .= " AND preco <= :preco_max";
     $params[':preco_max'] = $priceMax;
+}
+
+if ($areaMin > 0) {
+    $sql .= " AND area_total >= :area_min";
+    $params[':area_min'] = $areaMin;
+}
+if ($areaMax > 0 && $areaMax < 999999999) {
+    $sql .= " AND area_total <= :area_max";
+    $params[':area_max'] = $areaMax;
 }
 
 $sql .= " ORDER BY data_cadastro DESC";
