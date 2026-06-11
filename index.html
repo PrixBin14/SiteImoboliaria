@@ -19,7 +19,7 @@
         </div>
         <nav id="main-nav">
             <a href="#" onclick="showPage('vitrine')">Início</a>
-            <a href="#" onclick="showPage('vitrine')">Imóveis</a>
+            <a href="#" onclick="showPage('imoveis')">Imóveis</a>
             <a href="#" class="admin-link" onclick="showPage('login')">Painel</a>
         </nav>
     </header>
@@ -102,6 +102,106 @@
         </section>
     </main>
 
+    <!-- ================= NOVA PÁGINA: LISTAGEM DE IMÓVEIS ================= -->
+    <main id="page-imoveis" class="app-page">
+        <div class="breadcrumb">
+            <a href="#" onclick="showPage('vitrine')">Início</a> <span>&gt;</span> <a href="#">Imóveis à venda</a>
+        </div>
+
+        <div class="catalog-container">
+            <aside class="filter-sidebar">
+                <h3>Filtrar</h3>
+                
+                <div class="filter-group">
+                    <label>Transação</label>
+                    <select id="sidebar-status">
+                        <option value="todos">Comprar ou Alugar</option>
+                        <option value="Venda">Comprar</option>
+                        <option value="Aluguel">Alugar</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label>Tipos de imóvel</label>
+                    <select id="sidebar-category">
+                        <option value="todos">Todos os tipos</option>
+                        <option value="Casa">Casa</option>
+                        <option value="Apartamento">Apartamento</option>
+                        <option value="Terreno">Terreno</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label>Localidades</label>
+                    <input type="text" id="sidebar-city" placeholder="Digite o bairro ou cidade">
+                </div>
+
+                <div class="filter-row flex-3-inputs">
+                    <div class="filter-group">
+                        <label>Quartos</label>
+                        <select id="sidebar-bedrooms">
+                            <option value="todos">Qualquer</option>
+                            <option value="1">1+</option>
+                            <option value="2">2+</option>
+                            <option value="3">3+</option>
+                            <option value="4">4+</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Banheiros</label>
+                        <select id="sidebar-bathrooms">
+                            <option value="todos">Qualquer</option>
+                            <option value="1">1+</option>
+                            <option value="2">2+</option>
+                            <option value="3">3+</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Vagas</label>
+                        <select id="sidebar-garages">
+                            <option value="todos">Qualquer</option>
+                            <option value="1">1+</option>
+                            <option value="2">2+</option>
+                            <option value="3">3+</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="filter-row">
+                    <div class="filter-group">
+                        <label>Preço mínimo</label>
+                        <input type="number" id="sidebar-price-min" placeholder="R$">
+                    </div>
+                    <div class="filter-group">
+                        <label>Preço máximo</label>
+                        <input type="number" id="sidebar-price-max" placeholder="R$">
+                    </div>
+                </div>
+
+                <div class="sidebar-actions">
+                    <button class="btn-clear-filters" onclick="clearSidebarFilters()">Limpar</button>
+                    <button class="btn-apply-filters" onclick="executeSidebarSearch()">Buscar Imóveis</button>
+                </div>
+            </aside>
+
+            <section class="catalog-content">
+                <div class="catalog-header">
+                    <h2 id="catalog-counter">0 Imóveis Encontrados</h2>
+                    
+                    <div class="catalog-sorting">
+                        <select id="catalog-sort" onchange="sortCatalogProperties()">
+                            <option value="recentes">Mais recentes</option>
+                            <option value="preco-crescente">Menor Preço</option>
+                            <option value="preco-decrescente">Maior Preço</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="properties-grid" id="catalog-properties-grid"></div>
+            </section>
+        </div>
+    </main>
+
     <main id="page-login" class="app-page">
         <section class="auth-section">
             <div class="auth-card">
@@ -139,51 +239,93 @@
             <div class="admin-layout">
                 <div class="admin-card form-card">
                     <h3 id="form-action-title">Adicionar Novo Imóvel</h3>
-                    <form id="property-form" onsubmit="handlePropertySubmit(event)">
-                        <input type="hidden" id="edit-index" value="-1">
-                        
-                        <div class="form-group">
-                            <label>Título do Imóvel</label>
-                            <input type="text" id="prop-title" required placeholder="Ex: Cobertura Triplex com Vista Mar">
-                        </div>
+                    <form id="property-form" onsubmit="saveProperty(event)">
+                        <input type="hidden" id="form-property-id">
                         
                         <div class="form-row">
                             <div class="form-group">
-                                <label>Finalidade</label>
-                                <select id="prop-status" required>
-                                    <option value="Venda">Venda</option>
+                                <label for="form-title">Título do Imóvel</label>
+                                <input type="text" id="form-title" required placeholder="Ex: Casa Alto Padrão com Piscina">
+                            </div>
+                        </div>
+
+                        <div class="form-row flex-3">
+                            <div class="form-group">
+                                <label for="form-status">Finalidade</label>
+                                <select id="form-status" required>
+                                    <option value="Venda">Compra (Venda)</option>
                                     <option value="Aluguel">Aluguel</option>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label>Categoria</label>
-                                <select id="prop-category" required>
+                                <label for="form-category">Categoria</label>
+                                <select id="form-category" required>
                                     <option value="Casa">Casa</option>
                                     <option value="Apartamento">Apartamento</option>
                                     <option value="Terreno">Terreno</option>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label>Preço (R$)</label>
-                                <input type="text" id="prop-price" required placeholder="Ex: 2.500.000 ou 4.500/mês">
+                                <label for="form-price">Preço (R$)</label>
+                                <input type="text" id="form-price" required placeholder="Ex: 1.250.000">
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label>Cidade / Região</label>
-                            <input type="text" id="prop-location" required placeholder="Ex: Centro, Xanxerê - SC">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="form-location">Cidade / Bairro / Endereço</label>
+                                <input type="text" id="form-location" required placeholder="Ex: Centro, Xanxerê">
+                            </div>
+                            <div class="form-group">
+                                <label for="form-image">URL da Imagem ou Caminho do Arquivo</label>
+                                <input type="text" id="form-image" required placeholder="Ex: casa1.jpg ou link da web">
+                            </div>
                         </div>
 
-                        <div class="form-group">
-                            <label>URL da Imagem de Capa</label>
-                            <input type="url" id="prop-image" required placeholder="https://exemplo.com/foto.jpg">
-                            <small class="help-text">Insira um link de imagem ativo da internet.</small>
+                        <h3 class="form-section-title">Características do Imóvel</h3>
+                        
+                        <div class="form-row flex-4">
+                            <div class="form-group">
+                                <label for="form-bedrooms">Quartos</label>
+                                <input type="number" id="form-bedrooms" min="0" default="0" placeholder="0">
+                            </div>
+                            <div class="form-group">
+                                <label for="form-bathrooms">Banheiros</label>
+                                <input type="number" id="form-bathrooms" min="0" default="0" placeholder="0">
+                            </div>
+                            <div class="form-group">
+                                <label for="form-livingrooms">Salas</label>
+                                <input type="number" id="form-livingrooms" min="0" default="0" placeholder="0">
+                            </div>
+                            <div class="form-group">
+                                <label for="form-kitchens">Cozinhas</label>
+                                <input type="number" id="form-kitchens" min="0" default="0" placeholder="0">
+                            </div>
                         </div>
 
-                        <div class="form-actions">
-                            <button type="submit" class="btn-gold" id="btn-save-form">Salvar Imóvel</button>
-                            <button type="button" class="btn-cancel" id="btn-cancel-edit" onclick="resetPropertyForm()" style="display:none;">Cancelar</button>
+                        <div class="form-row flex-3">
+                            <div class="form-group">
+                                <label for="form-garages">Vagas de Garagem</label>
+                                <input type="number" id="form-garages" min="0" default="0" placeholder="0">
+                            </div>
+                            <div class="form-group">
+                                <label for="form-area-total">Metragem Total (m²)</label>
+                                <input type="number" id="form-area-total" min="0" placeholder="Ex: 360">
+                            </div>
+                            <div class="form-group">
+                                <label for="form-area-built">Área Construída (m²)</label>
+                                <input type="number" id="form-area-built" min="0" placeholder="Ex: 180">
+                            </div>
                         </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="form-others">Outros Cômodos / Descrição Breve</label>
+                                <input type="text" id="form-others" placeholder="Ex: 1 Escritório, 1 Área de Serviço, Closet...">
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-submit-property">Salvar Imóvel</button>
                     </form>
                 </div>
 

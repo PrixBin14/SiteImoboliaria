@@ -1136,3 +1136,294 @@ footer {
         font-size: 19px;
     }
 }
+
+/* ================= FORMULÁRIO DO PAINEL ADMIN ADAPTADO ================= */
+.form-section-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    color: #c5a059;
+    margin: 25px 0 15px 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 5px;
+}
+
+.form-row.flex-3 {
+    display: flex;
+    gap: 15px;
+}
+.form-row.flex-3 .form-group { flex: 1; }
+
+.form-row.flex-4 {
+    display: flex;
+    gap: 15px;
+}
+.form-row.flex-4 .form-group { flex: 1; }
+
+@media (max-width: 600px) {
+    .form-row.flex-3, .form-row.flex-4 {
+        flex-direction: column;
+        gap: 0;
+    }
+}
+
+/* ================= GRID DE CARACTERÍSTICAS NO CARD DO IMÓVEL ================= */
+.property-card-features {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 12px 0 8px 0;
+    padding-top: 8px;
+    border-top: 1px solid rgba(0,0,0,0.06);
+}
+
+.property-card-features span {
+    background-color: #f0f0f0;
+    color: #555555;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.property-card-extra-details {
+    background-color: rgba(197, 160, 89, 0.05);
+    border-left: 2px solid #c5a059;
+    padding: 6px 10px;
+    margin-bottom: 12px;
+    border-radius: 0 4px 4px 0;
+}
+
+.property-card-extra-details small {
+    display: inline-block;
+    color: #666666;
+    font-size: 11px;
+    margin-right: 10px;
+}
+
+.property-card-extra-details .block-text {
+    display: block;
+    margin-top: 2px;
+    font-style: italic;
+}
+
+/* ================= PÁGINA DE CATÁLOGO COMPLETO (DARK & GOLD) ================= */
+#page-imoveis {
+    background-color: #0d0d0d; /* Fundo oficial preto profundo da Home */
+    color: #e6e6e6; /* Texto claro de fácil leitura */
+    padding: 40px 6%;
+}
+
+.breadcrumb {
+    font-size: 13px;
+    margin-bottom: 30px;
+    color: #888888;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.breadcrumb a {
+    color: #888888;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+.breadcrumb a:hover {
+    color: #c5a059; /* Destaque Ouro ao passar o mouse */
+}
+.breadcrumb span {
+    margin: 0 10px;
+    color: #444444;
+}
+
+.catalog-container {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+}
+
+.filter-sidebar {
+    background-color: #141414; /* Fundo grafite idêntico ao do Header e Cards */
+    width: 320px;
+    min-width: 320px;
+    border-radius: 4px;
+    padding: 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border: 1px solid #c5a059; /* Borda fina Ouro delimitando o espaço */
+}
+
+.filter-sidebar h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 1px solid #c5a059;
+    padding-bottom: 8px;
+}
+
+.filter-group {
+    margin-bottom: 20px;
+}
+
+.filter-group label {
+    display: block;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #c5a059; /* Labels em Ouro para guiar os olhos */
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.filter-sidebar select,
+.filter-sidebar input {
+    width: 100%;
+    height: 44px;
+    border: 1px solid #333333;
+    border-radius: 2px;
+    padding: 0 12px;
+    font-size: 14px;
+    color: #ffffff;
+    background-color: #0d0d0d; /* Inputs pretos integrados */
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+.filter-sidebar select:focus,
+.filter-sidebar input:focus {
+    border-color: #c5a059; /* Acende em ouro ao focar no campo */
+    outline: none;
+}
+
+.filter-row {
+    display: flex;
+    gap: 12px;
+}
+
+/* Alinhamento para os 3 seletores numéricos em uma única linha na barra lateral */
+.filter-row.flex-3-inputs {
+    display: flex;
+    gap: 10px;
+}
+
+.filter-row.flex-3-inputs .filter-group {
+    flex: 1;
+}
+
+.filter-row.flex-3-inputs select {
+    padding: 0 6px;
+    font-size: 13px;
+}
+
+.sidebar-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 25px;
+}
+
+.btn-clear-filters {
+    background: transparent;
+    border: 1px solid #c5a059;
+    color: #c5a059;
+    padding: 12px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn-clear-filters:hover {
+    background-color: rgba(197, 160, 89, 0.1);
+}
+
+.btn-apply-filters {
+    flex: 1;
+    background-color: #b0853a;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn-apply-filters:hover {
+    background-color: #946e2f;
+}
+
+.catalog-content {
+    flex: 1;
+}
+
+.catalog-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #222222;
+    padding-bottom: 15px;
+}
+
+.catalog-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.catalog-sorting select {
+    height: 40px;
+    padding: 0 10px;
+    border: 1px solid #333333;
+    border-radius: 2px;
+    background-color: #141414;
+    color: #ffffff;
+    font-size: 13px;
+    cursor: pointer;
+}
+.catalog-sorting select:focus {
+    border-color: #c5a059;
+    outline: none;
+}
+
+/* Garante o acabamento premium nos cards sobre o fundo escuro */
+.property-card {
+    background-color: #141414; /* Caixa grafite */
+    border: 1px solid #222222;
+    border-radius: 4px;
+    overflow: hidden;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.property-card:hover {
+    transform: translateY(-5px);
+    border-color: #c5a059; /* A borda acende em ouro no hover */
+}
+
+.property-card-title {
+    color: #ffffff !important;
+}
+
+.property-card-location {
+    color: #aaaaaa !important;
+}
+
+.property-card-features span {
+    background-color: #1c1c1c !important; /* Em vez de cinza claro, agora é cinza chumbo */
+    color: #c5a059 !important; /* Texto em dourado sutil */
+}
+
+@media (max-width: 992px) {
+    .catalog-container {
+        flex-direction: column;
+    }
+    .filter-sidebar {
+        width: 100%;
+        min-width: 100%;
+    }
+}
