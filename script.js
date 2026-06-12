@@ -169,7 +169,7 @@ let imoveis = [
         ]
     }
 ]
-const TELEFONE_CORRETOR = "5549999999999";
+const TELEFONE_WHATSAPP = "5549999999999";
 
 function saveImoveisToStorage() {
     try {
@@ -362,11 +362,6 @@ function handlePropertySubmit(event) {
     resetPropertyForm();
     renderAdminTable();
     renderVitrine();
-}
-
-function startEditProperty(index) {
-    // Mantida para compatibilidade, delega para editProperty
-    editProperty(index);
 }
 
 function saveProperty(event) {
@@ -627,7 +622,7 @@ function openContactModal(propertyTitle) {
     document.getElementById('modal-prop-title').innerText = propertyTitle;
     
     const textoMensagem = `Olá! Tenho interesse em receber mais informações sobre o imóvel: "${propertyTitle}".`;
-    const urlCompleta = `https://wa.me/${TELEFONE_CORRETOR}?text=${encodeURIComponent(textoMensagem)}`;
+    const urlCompleta = `https://wa.me/${TELEFONE_WHATSAPP}?text=${encodeURIComponent(textoMensagem)}`;
     
     document.getElementById('modal-whatsapp-link').href = urlCompleta;
     document.getElementById('contactModal').style.display = 'flex';
@@ -692,15 +687,12 @@ function executeSearchStatus(statusValue, el) {
     document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
     if (el && el.classList) el.classList.add('active');
 
-    const searchStatusElem = document.getElementById('search-status');
-    if (searchStatusElem) {
-        searchStatusElem.value = statusValue;
-    }
+    const statusElem = document.getElementById('search-status');
+    if (statusElem) statusElem.value = statusValue;
 
-    const searchCityElem = document.getElementById('search-city');
-    const currentCity = searchCityElem ? searchCityElem.value : "";
-
-    renderVitrine({ status: statusValue, local: currentCity });
+    const local = document.getElementById('search-city')?.value || "";
+    const categoria = document.getElementById('search-category')?.value || 'todos';
+    renderVitrine({ status: statusValue, categoria, local });
 }
 
 function executeSidebarSearch() {
@@ -805,33 +797,6 @@ function clearSidebarFilters() {
     executeSidebarSearch();
 }
 
-function renderCardsNoGrid(list, containerId) {
-    const grid = document.getElementById(containerId);
-    if (!grid) return;
-    grid.innerHTML = '';
-
-    if (!list || list.length === 0) {
-        grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; color: #666; padding: 40px;">Nenhum imóvel corresponde aos critérios de busca.</div>`;
-        return;
-    }
-
-    list.forEach((item) => {
-        const cardHTML = `
-            <div class="card">
-                <div class="badge-status">${item.finalidade}</div>
-                <img src="${item.imagem}" alt="${item.titulo}">
-                <div class="card-body">
-                    <h3>${item.titulo}</h3>
-                    <p class="loc">📍 ${item.localizacao}</p>
-                    <p class="price-tag">R$ ${item.preco}</p>
-                    <button class="btn-details" onclick="openContactModal('${item.titulo}')">Tenho Interesse</button>
-                </div>
-            </div>
-        `;
-        grid.innerHTML += cardHTML;
-    });
-}
-
 function sortCatalogProperties() {
     executeSidebarSearch();
 }
@@ -842,30 +807,6 @@ window.addEventListener('DOMContentLoaded', () => {
     renderVitrine();
     renderAdminTable();
 
-    // Inicializa a dropzone caso exista a seção de anuncie
-    const dropzone = document.getElementById('upload-content-wrapper');
-    if (dropzone) {
-        // evento padrão de dropzone (apenas altera estilo visual)
-        dropzone.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            dropzone.style.borderColor = '#ffffff';
-        });
-        dropzone.addEventListener('dragleave', () => {
-            dropzone.style.borderColor = '#c5a059';
-        });
-        dropzone.addEventListener('drop', (e) => {
-            e.preventDefault();
-            dropzone.style.borderColor = '#c5a059';
-            const files = e.dataTransfer.files;
-            if (files && files.length > 0) {
-                const input = document.getElementById('file-input');
-                if (input) {
-                    input.files = files;
-                    previewImage({ target: input });
-                }
-            }
-        });
-    }
 });
 
 // Função para pré-visualizar a imagem de upload na página 'Anuncie'
@@ -895,13 +836,9 @@ function scrollToContactForm() {
     }
 }
 
-// Função de navegação unificada usada pelo rodapé para garantir scroll ao topo
+// Função de navegação usada pelo rodapé e header para garantir scroll ao topo
 function navegarPara(pageId) {
-    // Executa a função nativa do sistema que alterna as seções
     showPage(pageId);
-
-    // Leva o usuário para o topo da nova página suavemente
-    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // ------------------ Upload drag&drop + validação e otimização ------------------
@@ -975,73 +912,7 @@ function optimizeImageFile(file, maxWidth = 1600, quality = 0.8) {
     });
 }
 
-async function submitAnuncio(event) {
-    event.preventDefault();
-    const statusEl = document.getElementById('anuncio-status');
-    if (statusEl) statusEl.innerText = '';
-
-    const nome = document.getElementById('anunciante-nome').value.trim();
-    const email = document.getElementById('anunciante-email').value.trim();
-    const telefone = document.getElementById('anunciante-telefone').value.trim();
-    const titulo = document.getElementById('anuncio-titulo').value.trim();
-    const preco = document.getElementById('anuncio-preco').value.trim();
-    const mensagem = document.getElementById('anuncio-mensagem').value.trim();
-
-    if (!nome || !email || !telefone || !titulo) {
-        if (statusEl) statusEl.innerText = 'Preencha os campos obrigatórios.';
-        return;
-    }
-
-    let fileToUpload = announceSelectedFile;
-    if (fileToUpload) {
-        try {
-            fileToUpload = await optimizeImageFile(fileToUpload, 1600, 0.8);
-        } catch (err) {
-            console.error('Erro otimizando imagem:', err);
-            if (statusEl) statusEl.innerText = 'Erro ao processar a imagem.';
-            return;
-        }
-    }
-
-    const formData = new FormData();
-    formData.append('nome', nome);
-    formData.append('email', email);
-    formData.append('telefone', telefone);
-    formData.append('titulo', titulo);
-    formData.append('preco', preco);
-    formData.append('mensagem', mensagem);
-    if (fileToUpload) formData.append('imagem', fileToUpload);
-
-    if (statusEl) statusEl.innerText = 'Enviando anúncio...';
-
-    try {
-        const res = await fetch('salvar_anuncio.php', {
-            method: 'POST',
-            body: formData
-        });
-        const json = await res.json();
-        if (json.sucesso) {
-            if (statusEl) statusEl.innerText = 'Anúncio enviado com sucesso!';
-            document.getElementById('anuncie-form').reset();
-            // limpa preview
-            const output = document.getElementById('image-preview');
-            const wrapper = document.getElementById('upload-content-wrapper');
-            if (output) { output.src = '#'; output.style.display = 'none'; }
-            if (wrapper) wrapper.style.display = 'flex';
-            announceSelectedFile = null;
-        } else {
-            if (statusEl) statusEl.innerText = 'Falha ao enviar: ' + (json.mensagem || 'erro desconhecido');
-        }
-    } catch (err) {
-        console.error('Erro ao enviar anúncio:', err);
-        if (statusEl) statusEl.innerText = 'Erro de rede ao enviar anúncio.';
-    }
-}
-
-// Configuração do WhatsApp
-const TELEFONE_WHATSAPP = "5549999999999"; // Substitua pelo número da Tatiane
-
-// 1. Função para levar até o formulário
+// Função para levar até o formulário
 function scrollToForm() {
     const formSection = document.getElementById('anuncie-form-section');
     if (formSection) {
@@ -1049,11 +920,10 @@ function scrollToForm() {
     }
 }
 
-// 2. Função que pega os dados e abre o WhatsApp
+// Função que pega os dados e abre o WhatsApp
 function submitAnuncio(event) {
-    event.preventDefault(); // Impede o envio padrão
+    event.preventDefault();
 
-    // Captura os valores
     const nome = document.getElementById('anunciante-nome').value;
     const email = document.getElementById('anunciante-email').value;
     const tel = document.getElementById('anunciante-telefone').value;
@@ -1061,7 +931,6 @@ function submitAnuncio(event) {
     const preco = document.getElementById('anuncio-preco').value;
     const msg = document.getElementById('anuncio-mensagem').value;
 
-    // Monta a mensagem formatada
     const textoWhatsApp = `*Olá, Tatiane! Gostaria de anunciar meu imóvel:*%0A%0A` +
                           `👤 *Nome:* ${nome}%0A` +
                           `📧 *E-mail:* ${email}%0A` +
@@ -1070,7 +939,6 @@ function submitAnuncio(event) {
                           `💰 *Preço:* ${preco}%0A` +
                           `📝 *Observações:* ${msg}`;
 
-    // Abre o WhatsApp
     window.open(`https://wa.me/${TELEFONE_WHATSAPP}?text=${textoWhatsApp}`, '_blank');
 }
 

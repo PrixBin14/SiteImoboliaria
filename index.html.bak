@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tatiane Soluções Imobiliárias | Alto Padrão & Gestão</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-p6O6QYyXQ2c1Qm1b0y0l1e7FQYb8q3zKZ8nL1rG9l9s7k6v0h2K1i2V5Yk3Z0q4r7J9V1b2w3x4y5z6a7b8c==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+</head>
+    
+<body>
+
+    <header class="main-header">
+        <div class="logo">
+            <img src="logoT.png" alt="Logo Tatiane Imóveis" class="logo-img">
+            <div class="logo-text">TATIANE <span>IMÓVEIS</span></div>
+        </div>
+        <nav id="main-nav" class="header-nav">
+            <a href="#" onclick="navegarPara('vitrine')">INÍCIO</a>
+            <a href="#" onclick="navegarPara('imoveis')">IMÓVEIS</a>
+            <a href="#" class="btn-anuncie-header" onclick="navegarPara('anuncie')">ANUNCIE SEU IMÓVEL</a>
+            <a href="#" class="btn-painel-header" onclick="navegarPara('login')">PAINEL</a>
+        </nav>
+    </header>
+
+    <main id="page-vitrine" class="app-page active">
+        
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Sua conquista no mais alto padrão</h1>
+                <p>Encontre imóveis exclusivos para venda e aluguel nas melhores localizações</p>
+                
+                <div class="advanced-search-title">PESQUISA AVANÇADA</div>
+                
+                <div class="search-bar">
+                    <div class="search-group">
+                        <label for="search-status">Finalidade</label>
+                        <select id="search-status">
+                            <option value="todos">Venda ou Aluguel</option>
+                            <option value="Venda">Venda</option>
+                            <option value="Aluguel">Aluguel</option>
+                        </select>
+                    </div>
+                    <div class="search-group">
+                        <label for="search-category">Categoria</label>
+                        <select id="search-category">
+                            <option value="todos">Todos os tipos</option>
+                            <option value="Casa">Casa</option>
+                            <option value="Apartamento">Apartamento</option>
+                            <option value="Terreno">Terreno</option>
+                        </select>
+                    </div>
+                    <div class="search-group">
+                        <label for="search-city">Cidade/Bairro</label>
+                        <input type="text" id="search-city" placeholder="Ex: Centro, Jardins...">
+                    </div>
+                    <button class="btn-search" onclick="executeSearch()">Buscar</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="regions-slider-section">
+            <div class="carousel-tabs">
+                <button class="tab-btn" onclick="executeSearchStatus('Aluguel', this)">Aluguel</button>
+                <button class="tab-btn" onclick="executeSearchStatus('Venda', this)">Compra</button>
+                <button class="tab-btn active" onclick="executeSearchStatus('todos', this)">Todos</button>
+            </div>
+            <div class="carousel-slider">
+                <div class="carousel-slide active" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.65)), url('xanxerematriz.jpg');">
+                    <div class="slide-content">
+                        <span class="slide-subtitle">imóveis em:</span>
+                        <h1 class="slide-title">{ Xanxerê }</h1>
+                    </div>
+                </div>
+                <div class="carousel-slide" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.65)), url('xaxim.jpg');">
+                    <div class="slide-content">
+                        <span class="slide-subtitle">imóveis em:</span>
+                        <h1 class="slide-title">{ Xaxim }</h1>
+                    </div>
+                </div>
+                <button class="carousel-arrow arrow-left" onclick="moveSlide(-1)">&#10094;</button>
+                <button class="carousel-arrow arrow-right" onclick="moveSlide(1)">&#10095;</button>
+            </div>
+            <div class="carousel-dots">
+                <span class="dot active" onclick="currentSlide(0)"></span>
+                <span class="dot" onclick="currentSlide(1)"></span>
+            </div>
+        </section>
+
+        <section class="properties-section">
+            <div class="section-header">
+                <h2>Imóveis em Destaque</h2>
+                <div class="gold-line"></div>
+            </div>
+            <div class="properties-grid" id="public-properties-grid"></div>
+        </section>
+
+        <section class="agent-section">
+            <div class="section-header">
+                <h2>Entre em contato</h2>
+                <div class="gold-line-double">
+                    <div class="line-1"></div>
+                    <div class="line-2"></div>
+                </div>
+            </div>
+
+            <div class="agent-card">
+                <div class="agent-card-header"></div>
+                <div class="agent-card-body">
+                    <div class="agent-avatar">
+                        <img src="tatiana.jpg" alt="Tatiane">
+                    </div>
+                    <h3>Tatiane</h3>
+                    <p class="agent-role">Corretora de Imóveis</p>
+                    <p class="agent-creci">CRECI 29000</p>
+                </div>
+                
+                <div class="agent-card-footer">
+                    <a href="tel:+5549999999999" class="agent-action-btn" title="Ligar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16"><path d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/></svg>
+                    </a>
+                    <a href="https://wa.me/5549999999999?text=Olá%20Tatiane,%20gostaria%20de%20tirar%20algumas%20dúvidas." target="_blank" class="agent-action-btn" title="Chamar no WhatsApp">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16"><path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.925h.004c4.368 0 7.926-3.559 7.93-7.93a7.9 7.9 0 0 0-2.327-5.619M7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592"/></svg>
+                    </a>
+                    <a href="mailto:contato@tatianesolucoes.com.br" class="agent-action-btn" title="Enviar E-mail">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16"><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1zm13 2.383-4.708 2.825L15 11.105zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741M1 11.105l4.708-2.897L1 5.383z"/></svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="instagram-banner">
+            <div class="insta-content">
+                <span class="insta-text">Me siga no instagram</span>
+                <div class="insta-profile-wrapper">
+                    <div class="insta-avatar">
+                        <img src="tatiana.jpg" alt="Tatiane">
+                    </div>
+                    <div class="insta-icon-badge">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.444-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"/></svg>
+                    </div>
+                </div>
+                <a href="https://instagram.com/tatianesolucoesimoveis" target="_blank" class="insta-handle">/tatianesolucoesimoveis</a>
+            </div>
+        </section>
+    </main>
+
+
+    <main id="page-imoveis" class="app-page">
+        <div class="breadcrumb">
+            <a href="#" onclick="showPage('vitrine')">Início</a> <span>&gt;</span> <a href="#">Imóveis</a>
+        </div>
+
+        <div class="catalog-container">
+            <aside class="filter-sidebar">
+                <h3>Filtrar</h3>
+                
+                <div class="filter-group">
+                    <label>Buscar por Código (Ref)</label>
+                    <input type="text" id="sidebar-code" placeholder="Ex: REF-102">
+                </div>
+                <div class="filter-group">
+                    <label>Transação</label>
+                    <select id="sidebar-status">
+                        <option value="todos">Comprar ou Alugar</option>
+                        <option value="Venda">Comprar</option>
+                        <option value="Aluguel">Alugar</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Tipos de imóvel</label>
+                    <select id="sidebar-category">
+                        <option value="todos">Todos os tipos</option>
+                        <option value="Casa">Casa</option>
+                        <option value="Apartamento">Apartamento</option>
+                        <option value="Terreno">Terreno</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Localidades</label>
+                    <input type="text" id="sidebar-city" placeholder="Digite o bairro ou cidade">
+                </div>
+
+                <div class="filter-group">
+                    <label>Quartos</label>
+                    <div class="btn-group-grid">
+                        <label class="btn-radio"><input type="radio" name="sidebar-bedrooms" value="1"><span>1</span></label>
+                        <label class="btn-radio"><input type="radio" name="sidebar-bedrooms" value="2"><span>2</span></label>
+                        <label class="btn-radio"><input type="radio" name="sidebar-bedrooms" value="3"><span>3</span></label>
+                        <label class="btn-radio"><input type="radio" name="sidebar-bedrooms" value="4"><span>4+</span></label>
+                    </div>
+                </div>
+
+                <div class="filter-row">
+                    <div class="filter-group">
+                        <label>Área mín (m²)</label>
+                        <input type="number" id="sidebar-area-min" placeholder="">
+                    </div>
+                    <div class="filter-group">
+                        <label>Área máx (m²)</label>
+                        <input type="number" id="sidebar-area-max" placeholder="">
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <label>Banheiros</label>
+                    <div class="btn-group-grid">
+                        <label class="btn-radio"><input type="radio" name="sidebar-bathrooms" value="1"><span>1</span></label>
+                        <label class="btn-radio"><input type="radio" name="sidebar-bathrooms" value="2"><span>2</span></label>
+                        <label class="btn-radio"><input type="radio" name="sidebar-bathrooms" value="3"><span>3</span></label>
+                        <label class="btn-radio"><input type="radio" name="sidebar-bathrooms" value="4"><span>4+</span></label>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <label>Vagas</label>
+                    <div class="btn-group-grid">
+                        <label class="btn-radio"><input type="radio" name="sidebar-garages" value="1"><span>1</span></label>
+                        <label class="btn-radio"><input type="radio" name="sidebar-garages" value="2"><span>2</span></label>
+                        <label class="btn-radio"><input type="radio" name="sidebar-garages" value="3"><span>3</span></label>
+                        <label class="btn-radio"><input type="radio" name="sidebar-garages" value="4"><span>4+</span></label>
+                    </div>
+                </div>
+                
+                <div class="filter-row">
+                    <div class="filter-group">
+                        <label>Preço mínimo</label>
+                        <input type="number" id="sidebar-price-min" placeholder="R$">
+                    </div>
+                    <div class="filter-group">
+                        <label>Preço máximo</label>
+                        <input type="number" id="sidebar-price-max" placeholder="R$">
+                    </div>
+                </div>
+
+                <div class="sidebar-actions">
+                    <button class="btn-clear-filters" onclick="clearSidebarFilters()">Limpar</button>
+                    <button class="btn-apply-filters" onclick="executeSidebarSearch()">Buscar Imóveis</button>
+                </div>
+            </aside>
+
+            <section class="catalog-content">
+                <div class="catalog-header">
+                    <h2 id="catalog-counter">0 Imóveis Encontrados</h2>
+                    <div class="catalog-sorting">
+                        <select id="catalog-sort" onchange="sortCatalogProperties()">
+                            <option value="recentes">Mais recentes</option>
+                            <option value="preco-crescente">Menor Preço</option>
+                            <option value="preco-decrescente">Maior Preço</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="properties-grid" id="catalog-properties-grid"></div>
+            </section>
+        </div>
+    </main>
+
+
+    <main id="page-detalhes" class="app-page">
+        <div class="breadcrumb">
+            <a href="#" onclick="showPage('vitrine')">Início</a> <span>&gt;</span> 
+            <a href="#" onclick="showPage('imoveis')">Imóveis</a> <span>&gt;</span> 
+            <span id="detalhe-ref-topo" style="color: #c5a059;">REF-000</span>
+        </div>
+
+        <div class="details-wrapper">
+            <div class="details-main-content">
+                <h1 id="detalhe-titulo">Título do Imóvel</h1>
+                <p id="detalhe-localizacao" class="details-location">📍 Localização do Imóvel</p>
+            
+                <div class="details-gallery">
+                    <img id="detalhe-imagem" src="" alt="Foto do Imóvel">
+                </div>
+
+                <div class="details-section">
+                    <h2>Ficha Técnica</h2>
+                    <div class="specs-table-grid">
+                        <div class="spec-item"><span>Quartos</span><strong id="detalhe-quartos">0</strong></div>
+                        <div class="spec-item"><span>Banheiros</span><strong id="detalhe-banheiros">0</strong></div>
+                        <div class="spec-item"><span>Salas</span><strong id="detalhe-salas">0</strong></div>
+                        <div class="spec-item"><span>Cozinhas</span><strong id="detalhe-cozinhas">0</strong></div>
+                        <div class="spec-item"><span>Vagas</span><strong id="detalhe-vagas">0</strong></div>
+                        <div class="spec-item"><span>Metragem</span><strong id="detalhe-area-total">0 m²</strong></div>
+                        <div class="spec-item"><span>Construída</span><strong id="detalhe-area-construida">0 m²</strong></div>
+                    </div>
+                </div>
+
+                <div class="details-section">
+                    <h2>Descrição e Cômodos Adicionais</h2>
+                    <p id="detalhe-descricao" class="details-description-text">Nenhum detalhe adicional informado.</p>
+                </div>
+
+                <div class="details-section map-region-section">
+                    <h2 id="detalhe-regiao-titulo">Conheça a região do bairro</h2>
+                    <div class="map-banner-container">
+                        <a id="detalhe-btn-maps" href="#" target="_blank" class="btn-explore-neighborhood">Explore o bairro</a>
+                    </div>
+                </div>
+
+                <div class="details-section contact-form-section">
+                    <h2>Gostou deste imóvel?</h2>
+                    <p>Preencha o formulário abaixo e tire todas suas dúvidas sem compromisso.</p>
+                    <form id="detail-lead-form" class="horizontal-contact-form" onsubmit="handleLeadSubmit(event)">
+                        <input type="text" placeholder="Nome" required>
+                        <input type="email" placeholder="E-mail" required>
+                        <div class="phone-input-group">
+                            <span class="flag-icon">🇧🇷 (+55)</span>
+                            <input type="tel" placeholder="Ex: (00) 00000-0000" required>
+                        </div>
+                        <button type="submit" class="btn-submit-lead">Entrar em contato</button>
+                    </form>
+                </div>
+            </div>
+
+            <aside class="details-sidebar-card">
+                <div class="sticky-contact-box">
+                    <span id="detalhe-badge" class="badge-status">Venda</span>
+                    <div class="price-tag-container">
+                        <small>Valor do Investimento</small>
+                        <h2 id="detalhe-preco">R$ 0,00</h2>
+                    </div>
+                    <div class="broker-info">
+                        <div class="broker-avatar">T</div>
+                        <div>
+                            <h4>Tatiane Soluções Imobiliárias</h4>
+                            <p>Gestão & Alto Padrão</p>
+                        </div>
+                    </div>
+                    <a id="detalhe-btn-whatsapp" href="#" target="_blank" class="btn-whatsapp-direct">💬 Fale Direto no WhatsApp</a>
+                    <button class="btn-back-catalog" onclick="showPage('imoveis')">← Voltar para a Listagem</button>
+                </div>
+            </aside>
+        </div>
+
+        <div class="related-properties-section">
+            <h2>Outras Opções Exclusivas para Você</h2>
+            <div id="related-properties-grid" class="properties-grid-layout"></div>
+        </div>
+    </main>
+
+   <section id="page-anuncie" class="app-page">
+    <section class="anuncie-banner">
+        <div class="anuncie-banner-overlay">
+            <h1>Anuncie seu imóvel comigo</h1>
+        </div>
+    </section>
+
+<section class="anuncie-container">
+    <div class="anuncie-grid"> 
+        
+        <!-- Coluna da Foto -->
+        <div class="anuncie-photo-column">
+            <img src="tatiana.jpg" alt="Tatiane" class="static-anuncie-img">
+        </div>
+
+        <!-- Coluna do Texto -->
+        <div class="anuncie-text-column">
+            <h2>Exclusividade e estratégia para o seu imóvel</h2>
+            <div class="anuncie-gold-line"></div>
+            <div class="anuncie-paragraphs">
+                <p>Olá, sou <strong>Tatiane</strong>, especialista no mercado imobiliário, e entendo que cada empreendimento de alto padrão é único e deve ser apresentado com a mesma sofisticação que carrega em seus detalhes.</p>
+                <p><strong>Produção profissional de fotos e vídeos:</strong> Registramos cada ambiente com imagens de alto impacto.</p>
+                <p><strong>Destaque digital:</strong> Cada lançamento ganha lugar em uma vitrine online exclusiva.</p>
+                <p class="highlight-commitment">Nosso compromisso é transformar cada anúncio em uma experiência estratégica, capaz de gerar desejo, credibilidade e resultados reais.</p>
+            </div>
+            
+            <!-- Botão centralizado -->
+            <div class="button-center-wrapper">
+                <button class="btn-anunciar-submit" onclick="scrollToForm()">Anunciar meu imóvel</button>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+    <section id="anuncie-form-section" class="anuncie-form-section">
+        <div class="form-card-container">
+            <h3>Preencha seus dados para anunciar</h3>
+            <form id="anuncie-form" onsubmit="submitAnuncio(event)">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Seu nome</label>
+                        <input type="text" id="anunciante-nome" required>
+                    </div>
+                    <div class="form-group">
+                        <label>E-mail</label>
+                        <input type="email" id="anunciante-email" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Telefone</label>
+                        <input type="tel" id="anunciante-telefone" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Preço (opcional)</label>
+                        <input type="text" id="anuncio-preco" placeholder="Ex: 1.250.000">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group" style="flex:1">
+                        <label>Título do imóvel</label>
+                        <input type="text" id="anuncio-titulo" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group" style="flex:1">
+                        <label>Mensagem / Observações</label>
+                        <textarea id="anuncio-mensagem" rows="4"></textarea>
+                    </div>
+                </div>
+                <div class="form-row" style="margin-top:18px; gap:12px; align-items:center;">
+                    <button type="submit" class="btn-anunciar-submit">Enviar Anúncio</button>
+                    <div id="anuncio-status" style="color:#c5a059; font-weight:600; display:inline-block; margin-left:12px;"></div>
+                </div>
+            </form>
+        </div>
+    </section>
+</section>
+
+    <main id="page-login" class="app-page">
+        <section class="auth-section">
+            <div class="auth-card">
+                <h2>Acesso Restrito</h2>
+                <p>Insira suas credenciais para gerenciar o catálogo</p>
+                <div id="login-error" class="error-msg">Usuário ou senha incorretos!</div>
+                <form id="login-form" onsubmit="handleLogin(event)">
+                    <div class="form-group"><label>Usuário</label><input type="text" id="auth-user" required></div>
+                    <div class="form-group"><label>Senha</label><input type="password" id="auth-pass" required></div>
+                    <button type="submit" class="btn-gold-block">Entrar no Painel</button>
+                </form>
+                <button class="btn-link" onclick="showPage('vitrine')">← Voltar para a Vitrine</button>
+            </div>
+        </section>
+    </main>
+
+    <main id="page-admin" class="app-page">
+        <section class="admin-section">
+            <div class="admin-header">
+                <div>
+                    <h2>Painel Administrativo</h2>
+                    <p>Gerencie, edite ou remova imóveis do seu site em tempo real</p>
+                </div>
+                <button class="btn-logout" onclick="handleLogout()">Sair do Sistema ✕</button>
+            </div>
+            </section>
+    </main>
+
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h3 id="modal-prop-title">Gostou deste imóvel?</h3>
+            <p>Escolha o canal de atendimento para falar com nosso consultor exclusivo:</p>
+            <a href="#" id="modal-whatsapp-link" target="_blank" class="btn-whatsapp">Conversar no WhatsApp</a>
+            <div class="separator">ou envie um e-mail</div>
+            <form id="contact-form" onsubmit="submitForm(event)">
+                <input type="text" placeholder="Seu Nome" required>
+                <input type="email" placeholder="Seu E-mail" required>
+                <input type="tel" placeholder="Seu Telefone" required>
+                <button type="submit" class="btn-gold-block">Enviar Proposta</button>
+            </form>
+        </div>
+    </div>
+
+    <a href="https://wa.me/5549999999999?text=Ol%C3%A1!%20Gostaria%20de%20falar%20com%20um%20consultor." 
+       class="whatsapp-floating-btn" target="_blank" rel="noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 16 16"><path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.925h.004c4.368 0 7.926-3.559 7.93-7.93a7.9 7.9 0 0 0-2.327-5.619M7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.618-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232"/></svg>
+    </a>
+
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-column footer-menu">
+                <h3>Menu</h3>
+                <div class="footer-underline"></div>
+                <ul>
+                    <li><a href="#" onclick="navegarPara('vitrine')">Início</a></li>
+                    <li><a href="#" onclick="navegarPara('imoveis')">Imóveis</a></li>
+                    <li><a href="#" onclick="navegarPara('anuncie')">Anuncie seu imóvel aqui</a></li>
+                </ul>
+            </div>
+            <div class="footer-column footer-branding">
+                <div class="brand-block">
+                    <img src="logoT.png" alt="Logo T" class="footer-logo-img">
+                    <div class="brand-text">
+                        <h2 class="brand-name">TATIANE</h2>
+                        <span class="brand-cursive">Soluções Imobiliárias</span>
+                            <p class="footer-creci">CRECI: 29000</p>
+                    </div>
+                </div>
+
+                <p class="footer-disclaimer">
+                    Os valores, condições e disponibilidade dos imóveis estão sujeitos a alterações sem aviso prévio.
+                </p>
+            </div>
+        </div> 
+
+        <div class="footer-bottom">
+            <div class="footer-bottom-container">
+                <p>© 2026 Prix&Bin design.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
